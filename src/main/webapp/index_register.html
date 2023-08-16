@@ -89,7 +89,7 @@
         <h4 class="my-0 fw-normal">登录</h4>
       </div>
       <div class="card-body text-center">
-        <form class="m-2 px-5 mx-5" action="verify">
+        <form class="m-2 px-5 mx-5" action="pwdverify">
           <div class="mb-3 text-start">
             <label for="account" class="form-label">用户名</label>
             <input type="text" required class="form-control" name="account" id="account" aria-describedby="emailHelp">
@@ -101,7 +101,7 @@
           </div>
           <div class="mb-3 text-start">
             <label for="exampleInputPassword1" class="form-label">密码</label>
-            <input type="password" class="form-control" name="pwd" id="exampleInputPassword1">
+            <input type="password" class="form-control" name="pwd" id="exampleInputPassword1" onblur="pwdverify()">
           </div>
           <div class="text-start"> <button type="submit" class="btn btn-danger">注册</button>
              </div>
@@ -126,6 +126,7 @@
   }
 </script>
 <script src="vite/build/assets/app.js"></script>
+<script src="./js/index.js"></script>
 </body>
 </html>
 <div class="container"></div>
