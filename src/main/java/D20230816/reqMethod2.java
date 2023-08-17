@@ -8,18 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/D20230816/anyone/*")
-public class anyMatched extends HttpServlet {
+@WebServlet("/D20230816/ServletRequest2")
+public class reqMethod2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("GBK");
-        resp.setCharacterEncoding("GBK");
-        resp.getWriter().write("任意匹配");
+        resp.getWriter().write("req.getHeader(\"User-Agent\")=" + req.getHeader("User-Agent"));
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("GBK");
-        resp.setCharacterEncoding("GBK");
-        resp.getWriter().write("任意匹配");    }
+        super.doPost(req, resp);
+    }
 }

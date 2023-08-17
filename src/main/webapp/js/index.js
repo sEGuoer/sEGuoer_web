@@ -5,7 +5,9 @@ function pwdverify() {
             console.log(1)
             // XMLHttpRequest对象用于在后台与服务器交换数据
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'pwdverify', true);
+            xhr.open('GET', '../pwdverify', true);
+            console.log(xhr.readyState)
+            console.log(xhr.status)
             xhr.onreadystatechange = function () {
                 console.log(2)
                 // readyState == 4说明请求已完成
