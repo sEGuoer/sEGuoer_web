@@ -1,5 +1,6 @@
-package D20230815;
+package D20230818;
 
+import D20230815.User;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,60 +9,48 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.Connection;
 import java.util.List;
 
-//@WebServlet("/verify")
-public class Method extends HttpServlet {
-    private List<User> list;
+@WebServlet("/verify")
+public class addUserInformationToDatabase extends HttpServlet {
+    private JDBCDemo jdbcTest;
 
-    public List<User> getList() {
-        return list;
+    public JDBCDemo getJdbcTest() {
+        return jdbcTest;
     }
 
-    public void setList(List<User> list) {
-        this.list = list;
+    public void setJdbcTest(JDBCDemo jdbcTest) {
+        this.jdbcTest = jdbcTest;
     }
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        List<User> list = new ArrayList<>();
-        User user1 = new User();
-        user1.setUser("admin1", "admin@1", "123","1");
-        User user2 = new User();
-        user2.setUser("person1", "person@1", "1234","2");
-        User user3 = new User();
-        user3.setUser("person2", "person@2", "12345","3");
-        list.add(user1);
-        list.add(user2);
-        list.add(user3);
-        setList(list);
+        JDBCDemo jdbcTest = new JDBCDemo();
+        setJdbcTest(jdbcTest);
     }
 
-  /*  @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println(req);
-       *//* req.setCharacterEncoding("GBK");
-        resp.setCharacterEncoding("GBK");*//*
-        String username = req.getParameter("email");
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String email = req.getParameter("email");
         String password = req.getParameter("pwd");
         String account = req.getParameter("account");
-        System.out.println(account + " " + username + " " + password);
-        //如果输入的用户名是abc，密码是123，则表示注册成功，反之注册失败
-//        resp.getWriter().write("注册成功");
-
+        JDBCDemo jdbcDemo = getJdbcTest();
+        Connection connection = jdbcDemo.getConnection();
+        jdbcDemo.add(connection,email,password,account);
     }
-*/
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println(req);
 //        req.setCharacterEncoding("GBK");
 //        resp.setCharacterEncoding("GBK");
         String email = req.getParameter("email");
         String password = req.getParameter("pwd");
         System.out.println(email + " " + password);
-        List<User> list = getList();
+        JDBCDemo jdbcDemo = getJdbcTest();
+        Connection connection = jdbcDemo.getConnection();
+        List<User> list = jdbcDemo.testPreparedStatement(connection);
         boolean isEmail = false;
         //如果输入的用户名是abc，密码是123，则表示注册成功，反之注册失败
         for (int i = 0; i < list.size(); i++) {
@@ -139,4 +128,3 @@ public class Method extends HttpServlet {
         }
     }
 }
-
