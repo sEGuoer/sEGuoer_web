@@ -11,7 +11,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-@WebServlet("/D20230817/GetPicture")
+@WebServlet("/D20230818/GetPicture2")
 public class GetPicture2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
