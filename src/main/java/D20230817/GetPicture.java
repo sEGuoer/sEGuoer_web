@@ -9,11 +9,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.Base64;
 
 @WebServlet("/D20230817/GetPicture")
 public class GetPicture extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        /*resp.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode("D20230817/QQ图片20230807174928.png","GBK"));
+        下载图片*/
         String url = this.getServletContext().getRealPath("D20230817/QQ图片20230807174928.png");
         System.out.println(url);
         FileInputStream fis = new FileInputStream(url);
@@ -26,5 +30,10 @@ public class GetPicture extends HttpServlet {
             os.write(buff, 0, len);
         }
         fis.close();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
     }
 }
