@@ -86,7 +86,7 @@
   <main class="container">
     <div class="card m-auto rounded-3 shadow-sm">
       <div class="card-header py-3">
-        <h4 class="my-0 fw-normal">登录</h4>
+        <h4 class="my-0 fw-normal">注册</h4>
       </div>
       <div class="card-body text-center">
         <form class="m-2 px-5 mx-5" action="verify">
@@ -96,12 +96,12 @@
           </div>
           <div class="mb-3 text-start">
             <label for="exampleInputEmail1" class="form-label">邮箱</label>
-            <input type="email" required class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" required class="form-control" name="email" onblur="pwdverify()" id="exampleInputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">输入的邮箱只用于登录，不会用作其他途径</div>
           </div>
           <div class="mb-3 text-start">
             <label for="exampleInputPassword1" class="form-label">密码</label>
-            <input type="password" class="form-control" name="pwd" id="exampleInputPassword1" onblur="pwdverify()">
+            <input type="password" class="form-control" name="pwd" id="exampleInputPassword1" >
           </div>
           <div class="text-start"> <button type="submit" class="btn btn-danger">注册</button>
              </div>

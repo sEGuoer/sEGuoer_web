@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>login</title>
+</head>
+<body>
+<form action="RequestServlet7" method="post">
+  <label for="username">username</label><input type="text" name="username" id="username">
+  <label for="password">password</label><input type="password" name="password" id="password">
+  <button type="submit">login</button>
+</form>
+
+<hr>
+
+<h3>ajax get</h3>
+<p id="ajaxGet"></p>
+<button onclick="ajaxGet()">ajax get</button>
+
+<hr>
+
+<h3>ajax post</h3>
+<p id="ajaxPost"></p>
+<button onclick="ajaxPost()">ajax post</button>
+<hr>
+<hr>
+
+<h3>jquery ajax get</h3>
+<p id="jqueryAjaxGet"></p>
+<button onclick="jqueryAjaxGet()">jquery ajax get</button>
+<hr>
+
+<h3>jquery post</h3>
+<p id="jqueryAjaxPost"></p>
+<button onclick="jqueryAjaxPost()">jquery ajax post</button>
+
+<script src="ajax-demo/js/jquery.js"></script>
+<script>
+  function ajaxGet() {
+    let xhr;
+    if (window.XMLHttpRequest) {
+      //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+      xhr = new XMLHttpRequest();
+    } else {
+      // IE6, IE5 浏览器执行代码
+      xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    /**
+     * 每当 readyState 改变时，就会触发 onreadystatechange 事件
+     *
+     * readyState
+     *   0: 请求未初始化
+     *   1: 服务器连接已建立
+     *   2: 请求已接收
+     *   3: 请求处理中
+     *   4: 请求已完成，且响应已就绪
+     *
+     * status
+     *   200: "OK"
+     *   404: 未找到页面
+     *
+     */
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+
+        /**
+         * 如需获得来自服务器的响应，请使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性
+         *   responseText	获得字符串形式的响应数据
+         *   responseXML	获得 XML 形式的响应数据
+         */
+        document.getElementById("ajaxGet").innerHTML = xhr.responseText;
+      }
+    }
+
+    /**
+     * open(method, url, async)
+     * 规定请求的类型、URL 以及是否异步处理请求
+     *   method：请求的类型；GET 或 POST
+     *   url：文件在服务器上的位置
+     *   async：true（异步）或 false（同步）
+     */
+    xhr.open("GET", "RequestServlet7?username=a&password=b", true);
+
+    /**
+     * send 将请求发送到服务器
+     */
+    xhr.send();
+  }
+
+  function ajaxPost() {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        document.getElementById("ajaxPost").innerHTML = xhr.responseText;
+      }
+    }
+    xhr.open("POST", "RequestServlet7", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("username=ua&password=pa");
+  }
+
+  function jqueryAjaxGet() {
+    $.get("RequestServlet7", {username: 'ujq', password: 'pjq'}, function(data){
+      document.getElementById("jqueryAjaxGet").innerHTML = data;
+    });
+  }
+
+  function jqueryAjaxPost() {
+    $.ajax({
+      type: 'post',
+      url: 'RequestServlet7',
+      data:{
+        username: 'ujqp',
+        password: 'pjqp',
+      },
+      success: function(data){
+        document.getElementById("jqueryAjaxPost").innerHTML = data;
+      }
+    });
+  }
+</script>
+</body>
+</html>
