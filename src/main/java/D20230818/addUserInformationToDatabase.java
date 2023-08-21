@@ -50,7 +50,7 @@ public class addUserInformationToDatabase extends HttpServlet {
                             "    <title>sEGuoer's_website</title>" +
                             "</head>\n" +
                             "<body>\n" +
-                            "<p>" + "登录成功" + "</p>" +
+                            "<p>" + "注册成功" + "</p>" +
                             "</body>\n" +
                             "</html>\n"
             );

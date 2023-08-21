@@ -61,16 +61,16 @@ public class JDBCDemo {
                 panduan = 3;
                 break;
             }
-            if (!isExist) {
-                try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
-                    ppstmt.setString(1, email);
-                    ppstmt.setString(2, password);
-                    ppstmt.setString(3, "person");
-                    ppstmt.setString(4, account);
-                    ppstmt.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        }
+        if (!isExist) {
+            try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
+                ppstmt.setString(1, email);
+                ppstmt.setString(2, password);
+                ppstmt.setString(3, "person");
+                ppstmt.setString(4, account);
+                ppstmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return panduan;
