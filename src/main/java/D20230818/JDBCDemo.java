@@ -70,13 +70,15 @@ public class JDBCDemo {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
         User useri = getUser(connection, email);
         boolean isExist = false;
-        boolean panduan = false;
         int i = 0;
         if (useri == null){
-            panduan = true;
         }else {
-            panduan = false;
             isExist = true;
+            if (useri.getAccount().equals(account)){
+                i = 1;
+            }else {
+                i = 3;
+            }
         }
         if (!isExist) {
             try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {

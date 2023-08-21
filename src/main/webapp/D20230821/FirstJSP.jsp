@@ -13,5 +13,9 @@
 <body>
 <% System.out.println("hello jsp"); %>
 <%= "hello,jsp" %>
+<%!public void sout(){
+    System.out.println("这是一个方法");
+}  %>
+<%!static int a = 1;%>
 </body>
 </html>

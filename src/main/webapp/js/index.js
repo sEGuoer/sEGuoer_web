@@ -4,7 +4,7 @@ function pwdverify() {
     element.innerText = "该邮箱已被注册";
     element.className = "text-danger"
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'verify', true);
+    xhr.open('POST', 'RegisterVerify', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     xhr.send("email=" + document.getElementById("exampleInputEmail1").value);
     xhr.onreadystatechange = function () {
