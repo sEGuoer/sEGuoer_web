@@ -42,17 +42,26 @@ public class JDBCDemo {
         return null;
     }
 
-    public void add(Connection connection, String email, String password, String account) {
+    public int add(Connection connection, String email, String password, String account) {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
         List<User> list = testPreparedStatement(connection);
         boolean isExist = false;
+        int panduan = 0;
         for (User useri : list) {
-            if (useri.getAccount().equals(account) || useri.getEmail().equals(email)) {
+            if (useri.getAccount().equals(account) && useri.getEmail().equals(email)) {
                 isExist = true;
+                panduan = 1;
+                break;
+            } else if (useri.getAccount().equals(account) && !useri.getEmail().equals(email)) {
+                isExist = true;
+                panduan = 2;
+                break;
+            } else if (useri.getEmail().equals(email) && !useri.getAccount().equals(account)) {
+                isExist = true;
+                panduan = 3;
                 break;
             }
-        }
-            if (!isExist){
+            if (!isExist) {
                 try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
                     ppstmt.setString(1, email);
                     ppstmt.setString(2, password);
@@ -63,6 +72,8 @@ public class JDBCDemo {
                     e.printStackTrace();
                 }
             }
+        }
+        return panduan;
     }
 
     public static void main(String[] args) {

@@ -37,7 +37,72 @@ public class addUserInformationToDatabase extends HttpServlet {
         String account = req.getParameter("account");
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        jdbcDemo.add(connection,email,password,account);
+        int panduan = jdbcDemo.add(connection,email,password,account);
+        if (panduan == 0){
+            resp.getWriter().write(
+                    "<!doctype html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <meta name=\"viewport\"\n" +
+                            "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
+                            "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                            "    <title>sEGuoer's_website</title>" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<p>" + "登录成功" + "</p>" +
+                            "</body>\n" +
+                            "</html>\n"
+            );
+        }else if (panduan == 1){
+            resp.getWriter().write(
+                    "<!doctype html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <meta name=\"viewport\"\n" +
+                            "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
+                            "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                            "    <title>sEGuoer's_website</title>" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<p>" + "账号和邮箱都重复，请重新注册" + "</p>" +
+                            "</body>\n" +
+                            "</html>\n"
+            );
+        }else if (panduan == 2){
+            resp.getWriter().write(
+                    "<!doctype html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <meta name=\"viewport\"\n" +
+                            "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
+                            "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                            "    <title>sEGuoer's_website</title>" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<p>" + "账号重复，请重新注册" + "</p>" +
+                            "</body>\n" +
+                            "</html>\n"
+            );
+        }else if (panduan == 3){
+            resp.getWriter().write(
+                    "<!doctype html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <meta name=\"viewport\"\n" +
+                            "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
+                            "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                            "    <title>sEGuoer's_website</title>" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<p>" + "邮箱重复，请重新注册" + "</p>" +
+                            "</body>\n" +
+                            "</html>\n"
+            );
+        }
     }
 
     @Override
