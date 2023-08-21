@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet("/verify")
 public class addUserInformationToDatabase extends HttpServlet {
@@ -37,159 +38,42 @@ public class addUserInformationToDatabase extends HttpServlet {
         String account = req.getParameter("account");
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        int panduan = jdbcDemo.add(connection,email,password,account);
-        if (panduan == 0){
-            resp.getWriter().write(
-                    "<!doctype html>\n" +
-                            "<html lang=\"en\">\n" +
-                            "<head>\n" +
-                            "    <meta charset=\"UTF-8\">\n" +
-                            "    <meta name=\"viewport\"\n" +
-                            "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                            "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                            "    <title>sEGuoer's_website</title>" +
-                            "</head>\n" +
-                            "<body>\n" +
-                            "<p>" + "注册成功" + "</p>" +
-                            "</body>\n" +
-                            "</html>\n"
-            );
-        }else if (panduan == 1){
-            resp.getWriter().write(
-                    "<!doctype html>\n" +
-                            "<html lang=\"en\">\n" +
-                            "<head>\n" +
-                            "    <meta charset=\"UTF-8\">\n" +
-                            "    <meta name=\"viewport\"\n" +
-                            "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                            "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                            "    <title>sEGuoer's_website</title>" +
-                            "</head>\n" +
-                            "<body>\n" +
-                            "<p>" + "账号和邮箱都重复，请重新注册" + "</p>" +
-                            "</body>\n" +
-                            "</html>\n"
-            );
-        }else if (panduan == 2){
-            resp.getWriter().write(
-                    "<!doctype html>\n" +
-                            "<html lang=\"en\">\n" +
-                            "<head>\n" +
-                            "    <meta charset=\"UTF-8\">\n" +
-                            "    <meta name=\"viewport\"\n" +
-                            "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                            "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                            "    <title>sEGuoer's_website</title>" +
-                            "</head>\n" +
-                            "<body>\n" +
-                            "<p>" + "账号重复，请重新注册" + "</p>" +
-                            "</body>\n" +
-                            "</html>\n"
-            );
-        }else if (panduan == 3){
-            resp.getWriter().write(
-                    "<!doctype html>\n" +
-                            "<html lang=\"en\">\n" +
-                            "<head>\n" +
-                            "    <meta charset=\"UTF-8\">\n" +
-                            "    <meta name=\"viewport\"\n" +
-                            "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                            "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                            "    <title>sEGuoer's_website</title>" +
-                            "</head>\n" +
-                            "<body>\n" +
-                            "<p>" + "邮箱重复，请重新注册" + "</p>" +
-                            "</body>\n" +
-                            "</html>\n"
-            );
+        int panduan = jdbcDemo.add(connection, email, password, account);
+        if (panduan == 0) {
+            jdbcDemo.soutYourInfo(resp, "注册成功");
+        } else if (panduan == 1) {
+            jdbcDemo.soutYourInfo(resp, "账号和邮箱都重复，请重新注册");
+        } else if (panduan == 2) {
+            jdbcDemo.soutYourInfo(resp, "账号重复，请重新注册");
+        } else if (panduan == 3) {
+            jdbcDemo.soutYourInfo(resp, "邮箱重复，请重新注册");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req);
+//        System.out.println(req);
 //        req.setCharacterEncoding("GBK");
 //        resp.setCharacterEncoding("GBK");
         String email = req.getParameter("email");
         String password = req.getParameter("pwd");
-        System.out.println(email + " " + password);
+//        System.out.println(email + " " + password);
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        List<User> list = jdbcDemo.testPreparedStatement(connection);
-        boolean isEmail = false;
-        //如果输入的用户名是abc，密码是123，则表示注册成功，反之注册失败
-        for (int i = 0; i < list.size(); i++) {
-            User useri = list.get(i);
-            if (useri.getEmail().equals(email)) {
-                isEmail = true;
-                if (useri.getPassword().equals(password)) {
-                    if (useri.getUsername().equals("admin1")) {
-                        resp.getWriter().write(
-                                "<!doctype html>\n" +
-                                        "<html lang=\"en\">\n" +
-                                        "<head>\n" +
-                                        "    <meta charset=\"UTF-8\">\n" +
-                                        "    <meta name=\"viewport\"\n" +
-                                        "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                                        "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                                        "    <title>sEGuoer's_website</title>" +
-                                        "</head>\n" +
-                                        "<body>\n" +
-                                        "<p>" + list.toString() + "</p>" +
-                                        "</body>\n" +
-                                        "</html>\n"
-                        );
-                    } else {
-                        resp.getWriter().write(
-                                "<!doctype html>\n" +
-                                        "<html lang=\"en\">\n" +
-                                        "<head>\n" +
-                                        "    <meta charset=\"UTF-8\">\n" +
-                                        "    <meta name=\"viewport\"\n" +
-                                        "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                                        "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                                        "    <title>sEGuoer's_website</title>" +
-                                        "</head>\n" +
-                                        "<body>\n" +
-                                        "<p>" + email + "</p>" +
-                                        "</body>\n" +
-                                        "</html>\n"
-                        );
-                    }
-                    break;
+        User user = jdbcDemo.getUser(connection, email);
+        System.out.println(user == null);
+        if (user == null) {
+            jdbcDemo.soutYourInfo(resp, "没有找到该用户");
+        } else {
+            if (user.getPassword().equals(password)) {
+                if (user.getUsername().equals("admin")) {
+                    jdbcDemo.soutYourInfo(resp, jdbcDemo.testPreparedStatement(connection).toString());
                 } else {
-                    resp.getWriter().write(
-                            "<!doctype html>\n" +
-                                    "<html lang=\"en\">\n" +
-                                    "<head>\n" +
-                                    "    <meta charset=\"UTF-8\">\n" +
-                                    "    <meta name=\"viewport\"\n" +
-                                    "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                                    "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                                    "    <title>sEGuoer's_website</title>" +
-                                    "</head>\n" +
-                                    "<body>\n" +
-                                    "<p>" + "密码错误,登陆失败" + "</p>" +
-                                    "</body>\n" +
-                                    "</html>\n"
-                    );
+                    jdbcDemo.soutYourInfo(resp, user.toString());
                 }
+            }else {
+                jdbcDemo.soutYourInfo(resp, "密码错误，请重新输入");
             }
-        }
-        if (isEmail == false) {
-            resp.getWriter().write("<!doctype html>\n" +
-                    "<html lang=\"en\">\n" +
-                    "<head>\n" +
-                    "    <meta charset=\"UTF-8\">\n" +
-                    "    <meta name=\"viewport\"\n" +
-                    "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                    "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                    "    <title>sEGuoer's_website</title>" +
-                    "</head>\n" +
-                    "<body>\n" +
-                    "<p>" + "找不到邮箱,登陆失败" + "</p>" +
-                    "</body>\n" +
-                    "</html>\n");
         }
     }
 }
