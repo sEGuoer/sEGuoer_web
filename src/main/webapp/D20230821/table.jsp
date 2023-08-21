@@ -27,30 +27,32 @@
     user3.setUser("3", "3@qq.com", "222", "zcy3");
     list.add(user3);
 %>
-<%= "<table>\n" %>
-<%= "<tr\n>"%>
-<%= "<td\n>"%>
-<%="username" %>
-<%= "</td\n>"%>
-<%= "<td\n>"%>
-<%="email" %>
-<%= "</td\n>"%>
-<%= "<td\n>"%>
-<%="password" %>
-<%= "</td\n>"%>
-<%= "<td\n>"%>
-<%="account" %>
-<%= "</td\n>"%>
-<%= "</tr\n>"%>
-<% String sout = "";
-    for (User user : list) {
-        sout = sout + "<tr\n>" + "<td\n>" + user.getUsername() +
-                "</td\n>" + "<td\n>" + user.getEmail() + "</td\n>" +
-                "<td\n>" + user.getPassword() + "</td\n>" + "</td\n>" +
-                "<td\n>" + user.getAccount() + "</td\n>" + "</tr\n>";
-    }
-%>
-<%=sout %>
-<%= "</table>\n" %>
+<table>
+    <tr>
+        <td>
+            <%="username" %>
+        </td>
+        <td>
+                <%="email" %>
+        <td>
+            <%="password" %>
+        </td>
+        <td>
+            <%="account" %>
+        </td>
+    </tr>
+    <%
+        for (User user : list) {
+    %>
+    <tr>
+        <td><%=user.getUsername()%></td>
+        <td><%=user.getEmail()%></td>
+        <td><%=user.getPassword()%></td>
+        <td><%=user.getAccount()%></td>
+    </tr>
+    <%
+        }
+    %>
+</table>
 </body>
 </html>
