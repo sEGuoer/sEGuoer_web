@@ -39,6 +39,7 @@ public class addUserInformationToDatabase extends HttpServlet {
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
         int panduan = jdbcDemo.add(connection, email, password, account);
+        resp.setHeader("isEmail-exist","kajsldjasdjsalkdjalkdla");
         if (panduan == 0) {
             jdbcDemo.soutYourInfo(resp, "注册成功");
         } else if (panduan == 1) {

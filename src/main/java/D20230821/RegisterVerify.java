@@ -45,10 +45,13 @@ public class RegisterVerify extends HttpServlet {
         if (panduan == 0) {
             jdbcDemo.soutYourInfo(resp, "注册成功");
         } else if (panduan == 1) {
+            resp.setHeader("isEmail-exist","kajsldjasdjsalkdjalkdla");
             jdbcDemo.soutYourInfo(resp, "账号和邮箱都重复，请重新注册");
         } else if (panduan == 2) {
+            resp.setHeader("isEmail-exist","kajsldjasdjsalkdjalkdla");
             jdbcDemo.soutYourInfo(resp, "账号重复，请重新注册");
         } else if (panduan == 3) {
+            resp.setHeader("isEmail-exist","kajsldjasdjsalkdjalkdla");
             jdbcDemo.soutYourInfo(resp, "邮箱重复，请重新注册");
         }
     }

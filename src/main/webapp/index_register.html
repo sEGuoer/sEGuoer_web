@@ -91,13 +91,13 @@
       <div class="card-body text-center">
         <form class="m-2 px-5 mx-5" method="post" action="RegisterVerify">
           <div class="mb-3 text-start">
-            <label for="account" class="form-label">用户名</label>
-            <input type="text" required class="form-control" name="account" id="account" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3 text-start">
             <label for="exampleInputEmail1" class="form-label">邮箱</label>
             <input type="email" required class="form-control" name="email" onblur="pwdverify()" id="exampleInputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">输入的邮箱只用于登录，不会用作其他途径</div>
+          </div>
+          <div class="mb-3 text-start">
+            <label for="account" class="form-label">用户名</label>
+            <input type="text" required class="form-control" name="account" id="account" aria-describedby="emailHelp">
           </div>
           <div class="mb-3 text-start">
             <label for="exampleInputPassword1" class="form-label">密码</label>

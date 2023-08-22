@@ -93,7 +93,7 @@ public class JDBCDemo {
         }
         return i;
     }
-    public void soutYourInfo(HttpServletResponse resp, String sout) throws IOException {
+    public String soutYourInfo(HttpServletResponse resp, String sout) throws IOException {
         resp.getWriter().write(
                 "<!doctype html>\n" +
                         "<html lang=\"en\">\n" +
@@ -109,6 +109,7 @@ public class JDBCDemo {
                         "</body>\n" +
                         "</html>\n"
         );
+        return sout;
     }
 
     public static void main(String[] args) {
