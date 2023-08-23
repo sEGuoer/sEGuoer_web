@@ -44,6 +44,7 @@ public class RegisterVerify extends HttpServlet {
         int panduan = jdbcDemo.add(connection, email, password, account);
         if (panduan == 0) {
             jdbcDemo.soutYourInfo(resp, "注册成功");
+            resp.sendRedirect("./index_login.html");
         } else if (panduan == 1) {
             resp.setHeader("isEmail-exist","kajsldjasdjsalkdjalkdla");
             jdbcDemo.soutYourInfo(resp, "账号和邮箱都重复，请重新注册");

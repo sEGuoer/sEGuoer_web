@@ -33,22 +33,7 @@ public class addUserInformationToDatabase extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("pwd");
-        String account = req.getParameter("account");
-        JDBCDemo jdbcDemo = getJdbcTest();
-        Connection connection = jdbcDemo.getConnection();
-        int panduan = jdbcDemo.add(connection, email, password, account);
-        resp.setHeader("isEmail-exist","kajsldjasdjsalkdjalkdla");
-        if (panduan == 0) {
-            jdbcDemo.soutYourInfo(resp, "注册成功");
-        } else if (panduan == 1) {
-            jdbcDemo.soutYourInfo(resp, "账号和邮箱都重复，请重新注册");
-        } else if (panduan == 2) {
-            jdbcDemo.soutYourInfo(resp, "账号重复，请重新注册");
-        } else if (panduan == 3) {
-            jdbcDemo.soutYourInfo(resp, "邮箱重复，请重新注册");
-        }
+        doPost(req,resp);
     }
 
     @Override
@@ -63,17 +48,23 @@ public class addUserInformationToDatabase extends HttpServlet {
         Connection connection = jdbcDemo.getConnection();
         User user = jdbcDemo.getUser(connection, email);
         System.out.println(user == null);
+        resp.setHeader("isEmail-log-exist","kajsldjasdjsalkdjalkdla");
         if (user == null) {
-            jdbcDemo.soutYourInfo(resp, "没有找到该用户");
+            resp.setHeader("info","not found email");
         } else {
             if (user.getPassword().equals(password)) {
+                resp.setHeader("info","can found user");
                 if (user.getUsername().equals("admin")) {
-                    jdbcDemo.soutYourInfo(resp, jdbcDemo.testPreparedStatement(connection).toString());
+                    resp.setHeader("isEmail-log-exist","1");
+                    req.setAttribute("list",jdbcDemo.testPreparedStatement(connection));
+                    req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
                 } else {
-                    jdbcDemo.soutYourInfo(resp, user.toString());
+                    resp.setHeader("isEmail-log-exist","2");
+                    req.setAttribute("user",user);
+                    req.getRequestDispatcher("./D20230823/User.jsp").forward(req,resp);
                 }
             }else {
-                jdbcDemo.soutYourInfo(resp, "密码错误，请重新输入");
+                resp.setHeader("info","password wrong,please input right password");
             }
         }
     }
