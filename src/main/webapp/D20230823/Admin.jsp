@@ -96,11 +96,11 @@
                         <h1>用户列表</h1>
                     </div>
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        <ol class="breadcrumb float-sm-right" id="UserList">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active"><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                 <div class="btn-group me-2" role="group" aria-label="First group">
-                                    <button type="button" class="btn btn-primary">+</button>
+                                    <button type="button" class="btn btn-primary" onclick="inputAddUser()">+</button>
                                     <button type="button" class="btn btn-primary">-</button>
                                     <button type="button" class="btn btn-primary">更新</button>
                                 </div>
@@ -120,13 +120,15 @@
                         <th scope="col">Email</th>
                         <th scope="col">Password</th>
                         <th scope="col">Account</th>
+                        <th scope="col"></th>
                     </tr>
                     <c:forEach items="${list}" var="user" varStatus="i">
-                        <tr>
+                        <tr id="${user.getEmail()}">
                             <th scope="col">${i.count}</th>
                             <td>${user.getEmail()}</td>
                             <td>${user.getPassword()}</td>
-                            <td>${user.getAccount()}</td>
+                            <td>${user.getAccount()} </td>
+                            <td><button id="deleteUser" type="button" class="btn btn-info" onclick="deleteUser()">删除</button></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -148,5 +150,6 @@
 </div>
 <script src="./vite/build/assets/app.js"></script>
 <script src="./node_modules/admin-lte/dist/js/adminlte.min.js"></script>
+<script src="./js/admin.js "></script>
 </body>
 </html>

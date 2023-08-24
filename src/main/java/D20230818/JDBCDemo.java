@@ -112,6 +112,26 @@ public class JDBCDemo {
         return sout;
     }
 
+    public void delete(Connection connection,String email) {
+        PreparedStatement ppstmt = null;
+        String updateSql = "delete from user where email = ?";
+        try {
+            ppstmt = connection.prepareStatement(updateSql);
+            ppstmt.setString(1, email);
+            ppstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ppstmt != null) {
+                try {
+                    ppstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         JDBCDemo jdbcTest = new JDBCDemo();
         Connection connection = jdbcTest.getConnection();

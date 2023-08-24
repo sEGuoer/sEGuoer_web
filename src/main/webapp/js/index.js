@@ -9,7 +9,9 @@ function pwdverify() {
     xhr.open('POST', 'RegisterVerify', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     let email = document.getElementById("exampleInputEmail1").value
-    xhr.send("email=" + email);
+    let account = document.getElementById("account").value
+    let password = document.getElementById("exampleInputPassword1").value
+    xhr.send("email=" + email + "&account=" + account + "&pwd" + password);
     let accounts = email.split("@");
     console.log(accounts[0])
     if (!document.getElementById("email-check")) {
