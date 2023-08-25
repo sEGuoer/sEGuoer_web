@@ -13,7 +13,7 @@
     <title>Users</title>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
-    <link rel="stylesheet" href="./node_modules/admin-lte/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 </head>
 <body class="sidebar-mini" style="height: auto;">
 <div class="wrapper">
@@ -98,13 +98,16 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right" id="UserList">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active"><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                <div class="btn-group me-2" role="group" aria-label="First group">
-                                    <button type="button" class="btn btn-primary" onclick="inputAddUser()">+</button>
-                                    <button type="button" class="btn btn-primary">-</button>
-                                    <button type="button" class="btn btn-primary">更新</button>
+                            <li class="breadcrumb-item active">
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group me-2" role="group" aria-label="First group">
+                                        <button type="button" class="btn btn-primary" onclick="inputAddUser()">+
+                                        </button>
+                                        <button type="button" class="btn btn-primary">-</button>
+                                        <button type="button" class="btn btn-primary">更新</button>
+                                    </div>
                                 </div>
-                            </div></li>
+                            </li>
                         </ol>
                     </div>
                 </div>
@@ -123,12 +126,18 @@
                         <th scope="col"></th>
                     </tr>
                     <c:forEach items="${list}" var="user" varStatus="i">
-                        <tr id="${user.getEmail()}">
+                        <tr id="${user.getEmail()}" >
                             <th scope="col">${i.count}</th>
                             <td>${user.getEmail()}</td>
                             <td>${user.getPassword()}</td>
                             <td>${user.getAccount()} </td>
-                            <td><button id="deleteUser" type="button" class="btn btn-info" onclick="deleteUser()">删除</button></td>
+                            <td>
+                                <div class="btn-group me-2" role="group" aria-label="First group">
+                                    <button id="deleteUser" type="button" class="btn btn-info" onclick="deleteUser()">删除
+                                    </button>
+                                    <button id="updateUser" type="button" class="btn btn-info" onclick="updateUserButton()">更新</button>
+                                </div>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -149,7 +158,7 @@
     <div id="sidebar-overlay"></div>
 </div>
 <script src="./vite/build/assets/app.js"></script>
-<script src="./node_modules/admin-lte/dist/js/adminlte.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 <script src="./js/admin.js "></script>
 </body>
 </html>

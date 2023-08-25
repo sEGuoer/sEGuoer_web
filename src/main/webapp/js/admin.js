@@ -116,10 +116,42 @@ function pwdverify() {
     // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
 }
 
+function updatepwdverify() {
+    console.log(3)
+    let element = document.createElement("div");
+    element.innerText = "该邮箱已被注册";
+    element.className = "text-danger"
+    element.style = "display: none"
+    element.setAttribute("id", "updateEmail-check")
+    let email = document.getElementById("updateEmail1").value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('Post', 'updateOnblur', true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    xhr.send("email=" + email);
+    let accounts = email.split("@");
+    console.log(accounts[0]);
+    if (!document.getElementById("updateEmail-check")) {
+        document.getElementById("updateEmail1").after(element);
+    }
+    xhr.onreadystatechange = function () {
+        console.log(2);
+        // readyState == 4说明请求已完成
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304) && xhr.getResponseHeader("isEmail-exist") == "kajsldjasdjsalkdjalkdla") {
+            // 从服务器获得数据
+            console.log("add");
+            document.getElementById("updateEmail-check").style = "";
+        } else if (xhr.readyState == 4) {
+            console.log("delete");
+            document.getElementById("updateEmail-check").style = "display: none";
+            document.getElementById("updateAccount1").value = accounts[0];
+        }
+    };
+    // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
+}
 function deleteUser() {
-    let deleteEmail = event.target.parentNode.parentNode.id
+    let deleteEmail = event.target.parentNode.parentNode.parentNode.id
     console.log(deleteEmail)
-    event.target.parentNode.parentNode.remove()
+    event.target.parentNode.parentNode.parentNode.remove()
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'deleteUser', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
@@ -133,5 +165,82 @@ function deleteUser() {
         }
     };
 }
+let needUpdateEmail
+let addUpdateElement
+function updateUserButton() {
+    updateInfo();
+    let needUpdateEmailElement = event.target.parentNode.parentNode.parentNode
+    needUpdateEmail = needUpdateEmailElement.id
+    document.getElementById(needUpdateEmail).after(addUpdateElement)
+}
 
+function updateUser() {
+    let updateUserEmail = document.getElementById("updateEmail1").value
+    let updateUserPwd = document.getElementById("updatePassword1").value
+    let updateUserAccount = document.getElementById("updateAccount1").value
+    console.log(updateUserEmail, updateUserPwd, updateUserAccount)
+    event.target.parentNode.parentNode.remove()
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'updateUser', true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    xhr.send("email=" + updateUserEmail + "&account=" + updateUserAccount + "&pwd=" + updateUserPwd +"&updateEmail="+needUpdateEmail);
+    xhr.onreadystatechange = function () {
+        console.log(2);
+        // readyState == 4说明请求已完成
+        if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
+            // 从服务器获得数据
+            console.log("add");
+            location.reload();
+        }
+    };
+}
+
+function updateInfo() {
+    let trElement = document.createElement("tr")
+    let thElement = document.createElement("th")
+    thElement.scope = "col"
+
+    let tdElement1 = document.createElement("td")
+    tdElement1.innerText = "邮箱"
+    let inputElement1 = document.createElement("input")
+    inputElement1.type = "email"
+    inputElement1.setAttribute("onblur", "updatepwdverify()")
+    inputElement1.id = "updateEmail1"
+    inputElement1.setAttribute("aria-describedby", "emailHelp")
+    inputElement1.name = "email"
+    tdElement1.append(inputElement1)
+
+    let tdElement2 = document.createElement("td")
+    tdElement2.innerText = "密码"
+    let inputElement2 = document.createElement("input")
+    inputElement2.type = "text"
+    inputElement2.id = "updatePassword1"
+    inputElement2.setAttribute("aria-describedby", "emailHelp")
+    inputElement2.name = "pwd"
+    tdElement2.append(inputElement2)
+
+    let tdElement3 = document.createElement("td")
+    tdElement3.innerText = "账号"
+    let inputElement3 = document.createElement("input")
+    inputElement3.type = "text"
+    inputElement3.id = "updateAccount1"
+    inputElement3.setAttribute("aria-describedby", "emailHelp")
+    inputElement3.name = "account"
+    tdElement3.append(inputElement3)
+
+    let tdElement4 = document.createElement("td")
+    let buttonElement = document.createElement("button")
+    buttonElement.type = "button"
+    buttonElement.className = "btn btn-danger"
+    buttonElement.innerText = "更新"
+    buttonElement.setAttribute("onclick", "updateUser()")
+    tdElement4.append(buttonElement)
+
+    trElement.append(thElement)
+    trElement.append(tdElement1)
+    trElement.append(tdElement2)
+    trElement.append(tdElement3)
+    trElement.append(tdElement4)
+    addUpdateElement = trElement;
+}
 

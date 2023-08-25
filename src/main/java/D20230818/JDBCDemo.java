@@ -60,10 +60,11 @@ public class JDBCDemo {
                 System.out.println(id + "\t" + dataEmail + "\t" + password + "\t" + username + account);
                 return user;
             }
+            return null;
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public int add(Connection connection, String email, String password, String account) {
@@ -118,6 +119,28 @@ public class JDBCDemo {
         try {
             ppstmt = connection.prepareStatement(updateSql);
             ppstmt.setString(1, email);
+            ppstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ppstmt != null) {
+                try {
+                    ppstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    public void update(Connection connection, String email, String account,String password,String updateEmail) {
+        PreparedStatement ppstmt = null;
+        String updateSql = "update user set email = ? , account = ? , password = ? where email = ?";
+        try {
+            ppstmt = connection.prepareStatement(updateSql);
+            ppstmt.setString(1, email);
+            ppstmt.setString(2, account);
+            ppstmt.setString(3, password);
+            ppstmt.setString(4, updateEmail);
             ppstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
