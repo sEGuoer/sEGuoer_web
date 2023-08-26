@@ -1,5 +1,14 @@
+let AddUserList = false;
 function inputAddUser() {
-    setAddUserForm()
+    if (AddUserList === false){
+        setAddUserForm();
+        AddUserList = true;
+        console.log(false)
+    }else if (AddUserList === true){
+        document.getElementById("addUserForm").remove();
+        AddUserList = false;
+        console.log(true)
+    }
 }
 
 function setAddUserForm() {
@@ -81,6 +90,33 @@ function setAddUserForm() {
     console.log("loading")
 }
 
+
+function nextPage() {
+    const currentUrl = window.location.href;
+    let gotoURL;
+    let currentURL = currentUrl.split("&page=");
+    if (currentURL.length == 1) {
+        gotoURL = currentURL[0] + "&page=2";
+        window.location.href = gotoURL
+    } else {
+        let page = parseInt(currentURL[1]) + 1;
+        gotoURL = currentURL[0] + "&page=" + page;
+        window.location.href = gotoURL
+    }
+}
+function previousPage() {
+    let currentUrl = window.location.href;
+    let gotoURL;
+    let currentURL = currentUrl.split("&page=");
+    if (currentURL.length == 1 || currentURL[1] == 1) {
+        location.reload();
+    } else {
+        let page = parseInt(currentURL[1]) - 1;
+        gotoURL = currentURL[0] + "&page=" + page;
+        window.location.href = gotoURL
+    }
+}
+
 function pwdverify() {
     console.log(3)
     let element = document.createElement("div");
@@ -148,6 +184,7 @@ function updatepwdverify() {
     };
     // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
 }
+
 function deleteUser() {
     let deleteEmail = event.target.parentNode.parentNode.parentNode.id
     console.log(deleteEmail)
@@ -165,13 +202,24 @@ function deleteUser() {
         }
     };
 }
+
 let needUpdateEmail
 let addUpdateElement
+
+let updateList = false
 function updateUserButton() {
     updateInfo();
     let needUpdateEmailElement = event.target.parentNode.parentNode.parentNode
     needUpdateEmail = needUpdateEmailElement.id
-    document.getElementById(needUpdateEmail).after(addUpdateElement)
+    if (updateList === false){
+        updateList = true
+        if (!document.getElementById("updateList1")){
+            document.getElementById(needUpdateEmail).after(addUpdateElement)
+        }
+    }else if (updateList === true){
+        document.getElementById("updateList1").remove()
+        updateList = false
+    }
 }
 
 function updateUser() {
@@ -183,7 +231,7 @@ function updateUser() {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'updateUser', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-    xhr.send("email=" + updateUserEmail + "&account=" + updateUserAccount + "&pwd=" + updateUserPwd +"&updateEmail="+needUpdateEmail);
+    xhr.send("email=" + updateUserEmail + "&account=" + updateUserAccount + "&pwd=" + updateUserPwd + "&updateEmail=" + needUpdateEmail);
     xhr.onreadystatechange = function () {
         console.log(2);
         // readyState == 4说明请求已完成
@@ -197,6 +245,7 @@ function updateUser() {
 
 function updateInfo() {
     let trElement = document.createElement("tr")
+    trElement.id = "updateList1"
     let thElement = document.createElement("th")
     thElement.scope = "col"
 

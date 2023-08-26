@@ -103,8 +103,10 @@
                                     <div class="btn-group me-2" role="group" aria-label="First group">
                                         <button type="button" class="btn btn-primary" onclick="inputAddUser()">+
                                         </button>
-                                        <button type="button" class="btn btn-primary">-</button>
-                                        <button type="button" class="btn btn-primary">更新</button>
+                                        <button type="button" class="btn btn-primary" onclick="previousPage()">上一页
+                                        </button>
+                                        <button type="button" class="btn btn-primary" onclick="nextPage()">下一页
+                                        </button>
                                     </div>
                                 </div>
                             </li>
@@ -125,8 +127,8 @@
                         <th scope="col">Account</th>
                         <th scope="col"></th>
                     </tr>
-                    <c:forEach items="${list}" var="user" varStatus="i">
-                        <tr id="${user.getEmail()}" >
+                    <c:forEach items="${list}" var="user" begin="0" end="8" varStatus="i">
+                        <tr id="${user.getEmail()}">
                             <th scope="col">${i.count}</th>
                             <td>${user.getEmail()}</td>
                             <td>${user.getPassword()}</td>
@@ -135,7 +137,9 @@
                                 <div class="btn-group me-2" role="group" aria-label="First group">
                                     <button id="deleteUser" type="button" class="btn btn-info" onclick="deleteUser()">删除
                                     </button>
-                                    <button id="updateUser" type="button" class="btn btn-info" onclick="updateUserButton()">更新</button>
+                                    <button id="updateUser" type="button" class="btn btn-info"
+                                            onclick="updateUserButton()">更新
+                                    </button>
                                 </div>
                             </td>
                         </tr>

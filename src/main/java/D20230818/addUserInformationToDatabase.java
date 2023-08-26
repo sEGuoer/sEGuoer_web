@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
-import java.util.Objects;
 
 @WebServlet("/verify")
 public class addUserInformationToDatabase extends HttpServlet {
@@ -56,8 +55,26 @@ public class addUserInformationToDatabase extends HttpServlet {
                 resp.setHeader("info","can found user");
                 if (user.getUsername().equals("admin")) {
                     resp.setHeader("isEmail-log-exist","1");
-                    req.setAttribute("list",jdbcDemo.testPreparedStatement(connection));
-                    req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                    List<User> list = jdbcDemo.testPreparedStatement(connection);
+                    if (list.size()<10){
+                        req.setAttribute("list",list);
+                        req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                    }else {
+                        if (req.getParameter("page") == null){
+                            req.setAttribute("list",list);
+                            req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                        }else {
+                            int page = Integer.parseInt(req.getParameter("page"));
+                            if ((page - 1) * 9 > 0) {
+                                list.subList(0, (page - 1) * 9).clear();
+                                req.setAttribute("list",list);
+                                req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                            }else {
+                                req.setAttribute("list",list);
+                                req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                            }
+                        }
+                    }
                 } else {
                     resp.setHeader("isEmail-log-exist","2");
                     req.setAttribute("user",user);
