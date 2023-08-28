@@ -9,14 +9,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/CookieTest")
-public class CookieTest extends HttpServlet {
+@WebServlet("/rememberEmail")
+public class rememberEmail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie cookie = new Cookie("key5*60","value5*60");
-        cookie.setMaxAge(5 * 60);
+        String email = req.getParameter("email");
+        Cookie cookie = new Cookie("key2",email);
+        cookie.setMaxAge(12 * 60 * 60);
         resp.addCookie(cookie);
-        resp.getWriter().write(cookie.getName());
     }
 
     @Override

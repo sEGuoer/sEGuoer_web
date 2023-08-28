@@ -1,3 +1,14 @@
+if (document.cookie == ""){
+}else{
+    var select = document.getElementById("exampleCheck1")
+    select.checked = true;
+    var cookies1 = document.cookie.split(";");
+    var cookies2 = cookies1[0].split("=")
+    var cookie = cookies2[1]
+    document.getElementById("exampleInputEmail1").value = cookie
+}
+
+
 function verify() {
     console.log(3)
     let element = document.createElement("div");
@@ -33,5 +44,20 @@ function verify() {
         }
 
     };
+    var select = document.getElementById("exampleCheck1")
+    if (select.checked){
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open('POST', 'rememberEmail', true);
+        xhr1.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xhr1.send("email=" + email);
+        xhr1.onreadystatechange = function () {
+            console.log(2);
+            // readyState == 4说明请求已完成
+            if (xhr1.readyState == 4 && xhr1.status == 200 || xhr1.status == 304) {
+                // 从服务器获得数据
+                console.log("add");
+            }
+        };
+    }
     // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
 }
