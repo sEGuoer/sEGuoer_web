@@ -21,7 +21,9 @@
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
         <ul class="navbar-nav">
-
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Content</a>
             </li>
@@ -87,7 +89,7 @@
 
     </aside>
 
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="min-height: 1000px;">
 
         <section class="content-header">
             <div class="container-fluid">
@@ -119,33 +121,46 @@
         <section class="content">
 
             <div class="card">
-                <table class="table mb-0">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Account</th>
-                        <th scope="col"></th>
-                    </tr>
-                    <c:forEach items="${list}" var="user" begin="0" end="8" varStatus="i">
-                        <tr id="${user.getEmail()}">
-                            <th scope="col">${i.count}</th>
-                            <td>${user.getEmail()}</td>
-                            <td>${user.getPassword()}</td>
-                            <td>${user.getAccount()} </td>
-                            <td>
-                                <div class="btn-group me-2" role="group" aria-label="First group">
-                                    <button id="deleteUser" type="button" class="btn btn-info" onclick="deleteUser()">删除
-                                    </button>
-                                    <button id="updateUser" type="button" class="btn btn-info"
-                                            onclick="updateUserButton()">更新
-                                    </button>
-                                </div>
-                            </td>
+                <div class="card-body">
+                    <table class="table mb-0">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Account</th>
+                            <th scope="col"></th>
                         </tr>
-                    </c:forEach>
-                </table>
-
+                        <c:forEach items="${list}" var="user" begin="0" end="8" varStatus="i">
+                            <tr id="${user.getEmail()}">
+                                <th scope="col">${i.count}</th>
+                                <td>${user.getEmail()}</td>
+                                <td>${user.getPassword()}</td>
+                                <td>${user.getAccount()} </td>
+                                <td>
+                                    <div class="btn-group me-2" role="group" aria-label="First group">
+                                        <button id="deleteUser" type="button" class="btn btn-info"
+                                                onclick="deleteUser()">删除
+                                        </button>
+                                        <button id="updateUser" type="button" class="btn btn-info"
+                                                onclick="updateUserButton()">更新
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+                <div class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item">共${pageSum}页</li>
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                    </ul>
+                </div>
             </div>
 
         </section>

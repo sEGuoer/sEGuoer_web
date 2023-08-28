@@ -56,21 +56,31 @@ public class addUserInformationToDatabase extends HttpServlet {
                 if (user.getUsername().equals("admin")) {
                     resp.setHeader("isEmail-log-exist","1");
                     List<User> list = jdbcDemo.testPreparedStatement(connection);
+                    int pageSum;
+                    if (list.size()%9 == 0){
+                        pageSum = list.size()/9;
+                    }else {
+                        pageSum = list.size()/9 + 1;
+                    }
                     if (list.size()<10){
                         req.setAttribute("list",list);
+                        req.setAttribute("pageSum",pageSum);
                         req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
                     }else {
                         if (req.getParameter("page") == null){
                             req.setAttribute("list",list);
+                            req.setAttribute("pageSum",pageSum);
                             req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
                         }else {
                             int page = Integer.parseInt(req.getParameter("page"));
                             if ((page - 1) * 9 > 0) {
                                 list.subList(0, (page - 1) * 9).clear();
                                 req.setAttribute("list",list);
+                                req.setAttribute("pageSum",pageSum);
                                 req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
                             }else {
                                 req.setAttribute("list",list);
+                                req.setAttribute("pageSum",pageSum);
                                 req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
                             }
                         }

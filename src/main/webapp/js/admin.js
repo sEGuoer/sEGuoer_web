@@ -185,22 +185,26 @@ function updatepwdverify() {
     // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
 }
 
+
 function deleteUser() {
-    let deleteEmail = event.target.parentNode.parentNode.parentNode.id
-    console.log(deleteEmail)
-    event.target.parentNode.parentNode.parentNode.remove()
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'deleteUser', true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-    xhr.send("email=" + deleteEmail);
-    xhr.onreadystatechange = function () {
-        console.log(2);
-        // readyState == 4说明请求已完成
-        if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
-            // 从服务器获得数据
-            console.log("add");
-        }
-    };
+    var x = confirm("Are you sure you want to delete?");
+    if (x){
+        let deleteEmail = event.target.parentNode.parentNode.parentNode.id
+        console.log(deleteEmail)
+        event.target.parentNode.parentNode.parentNode.remove()
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'deleteUser', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xhr.send("email=" + deleteEmail);
+        xhr.onreadystatechange = function () {
+            console.log(2);
+            // readyState == 4说明请求已完成
+            if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
+                // 从服务器获得数据
+                console.log("add");
+            }
+        };
+    }
 }
 
 let needUpdateEmail
