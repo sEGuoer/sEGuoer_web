@@ -153,12 +153,11 @@
                 <div class="card-footer clearfix">
                     <ul class="pagination pagination-sm m-0 float-right">
                         <li class="page-item">共${pageSum}页</li>
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        <li class="page-item" onclick=homePage()><span class="page-link">«</span></li>
+                        <li class="page-item" onclick=previousPage()><span class="page-link">«</span></li>
+                        <li class="page-item" onclick=homePage()><span class="page-link">1</span></li>
+                        <li class="page-item" id="pageSum" onclick=lastPage()><span class="page-link">${pageSum}</span></li>
+                        <li class="page-item" onclick=nextPage()><span class="page-link">»</span></li>
                     </ul>
                 </div>
             </div>

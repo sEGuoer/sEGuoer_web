@@ -46,11 +46,10 @@ function verify() {
     };
     var select = document.getElementById("exampleCheck1")
     if (select.checked){
-        var xhr1 = new XMLHttpRequest();
-        xhr1.open('POST', 'rememberEmail', true);
-        xhr1.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhr1.send("email=" + email);
-        xhr1.onreadystatechange = function () {
+        xhr.open('POST', 'rememberEmail', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xhr.send("email=" + email);
+        xhr.onreadystatechange = function () {
             console.log(2);
             // readyState == 4说明请求已完成
             if (xhr1.readyState == 4 && xhr1.status == 200 || xhr1.status == 304) {

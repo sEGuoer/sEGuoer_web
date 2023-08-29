@@ -1,10 +1,11 @@
 let AddUserList = false;
+
 function inputAddUser() {
-    if (AddUserList === false){
+    if (AddUserList === false) {
         setAddUserForm();
         AddUserList = true;
         console.log(false)
-    }else if (AddUserList === true){
+    } else if (AddUserList === true) {
         document.getElementById("addUserForm").remove();
         AddUserList = false;
         console.log(true)
@@ -69,6 +70,7 @@ function setAddUserForm() {
 
     let formFatherhood = document.createElement("div")
     formFatherhood.className = "card-body text-center"
+    formFatherhood.action = "RegisterVerify"
     formFatherhood.append(formElement)
 
     let cardTitle = document.createElement("div")
@@ -104,6 +106,23 @@ function nextPage() {
         window.location.href = gotoURL
     }
 }
+
+function homePage() {
+    const currentUrl = window.location.href;
+    let gotoURL;
+    let currentURL = currentUrl.split("&page=");
+    gotoURL = currentURL[0] + "&page=1";
+    window.location.href = gotoURL
+}
+function lastPage() {
+    const currentUrl = window.location.href;
+    let pageSum = document.getElementById("pageSum").innerText
+    let gotoURL;
+    let currentURL = currentUrl.split("&page=");
+    gotoURL = currentURL[0] + "&page=" + pageSum;
+    window.location.href = gotoURL
+}
+
 function previousPage() {
     let currentUrl = window.location.href;
     let gotoURL;
@@ -116,6 +135,7 @@ function previousPage() {
         window.location.href = gotoURL
     }
 }
+
 
 function pwdverify() {
     console.log(3)
@@ -130,7 +150,7 @@ function pwdverify() {
     let email = document.getElementById("exampleInputEmail1").value;
     let account = document.getElementById("exampleInputAccount1").value;
     let password = document.getElementById("exampleInputPassword1").value;
-    xhr.send("email=" + email + "&account=" + account + "&pwd" + password);
+    xhr.send("email=" + email);
     let accounts = email.split("@");
     console.log(accounts[0]);
     if (!document.getElementById("email-check")) {
@@ -188,7 +208,7 @@ function updatepwdverify() {
 
 function deleteUser() {
     var x = confirm("Are you sure you want to delete?");
-    if (x){
+    if (x) {
         let deleteEmail = event.target.parentNode.parentNode.parentNode.id
         console.log(deleteEmail)
         event.target.parentNode.parentNode.parentNode.remove()
@@ -211,16 +231,17 @@ let needUpdateEmail
 let addUpdateElement
 
 let updateList = false
+
 function updateUserButton() {
     updateInfo();
     let needUpdateEmailElement = event.target.parentNode.parentNode.parentNode
     needUpdateEmail = needUpdateEmailElement.id
-    if (updateList === false){
+    if (updateList === false) {
         updateList = true
-        if (!document.getElementById("updateList1")){
+        if (!document.getElementById("updateList1")) {
             document.getElementById(needUpdateEmail).after(addUpdateElement)
         }
-    }else if (updateList === true){
+    } else if (updateList === true) {
         document.getElementById("updateList1").remove()
         updateList = false
     }

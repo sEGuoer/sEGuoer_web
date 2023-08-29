@@ -47,8 +47,9 @@ public class addUserInformationToDatabase extends HttpServlet {
         Connection connection = jdbcDemo.getConnection();
         User user = jdbcDemo.getUser(connection, email);
         System.out.println(user == null);
-        resp.setHeader("isEmail-log-exist","kajsldjasdjsalkdjalkdla");
+        resp.setHeader("isEmail-log-exist","2");
         if (user == null) {
+            resp.setHeader("isEmail-log-exist","kajsldjasdjsalkdjalkdla");
             resp.setHeader("info","not found email");
         } else {
             if (user.getPassword().equals(password)) {
