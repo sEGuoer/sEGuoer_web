@@ -44,7 +44,7 @@ function verify() {
         }
 
     };
-    var select = document.getElementById("exampleCheck1")
+    /*var select = document.getElementById("exampleCheck1")
     if (select.checked){
         xhr.open('POST', 'rememberEmail', true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
@@ -57,6 +57,6 @@ function verify() {
                 console.log("add");
             }
         };
-    }
+    }*/
     // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
 }

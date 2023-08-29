@@ -1,12 +1,14 @@
 package D20230818;
 
 import D20230815.User;
+import com.mysql.cj.Session;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -43,6 +45,7 @@ public class addUserInformationToDatabase extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("pwd");
 //        System.out.println(email + " " + password);
+        HttpSession session = req.getSession();
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
         User user = jdbcDemo.getUser(connection, email);
@@ -64,32 +67,37 @@ public class addUserInformationToDatabase extends HttpServlet {
                         pageSum = list.size()/9 + 1;
                     }
                     if (list.size()<10){
-                        req.setAttribute("list",list);
-                        req.setAttribute("pageSum",pageSum);
-                        req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                        session.setAttribute("list",list);
+                        session.setAttribute("pageSum",pageSum);
+                        session.setAttribute("role","admin");
+                        resp.sendRedirect ("./SetSession");
                     }else {
                         if (req.getParameter("page") == null){
-                            req.setAttribute("list",list);
-                            req.setAttribute("pageSum",pageSum);
-                            req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                            session.setAttribute("list",list);
+                            session.setAttribute("pageSum",pageSum);
+                            session.setAttribute("role","admin");
+                            resp.sendRedirect ("./SetSession");
                         }else {
                             int page = Integer.parseInt(req.getParameter("page"));
                             if ((page - 1) * 9 > 0) {
                                 list.subList(0, (page - 1) * 9).clear();
-                                req.setAttribute("list",list);
-                                req.setAttribute("pageSum",pageSum);
-                                req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                                session.setAttribute("list",list);
+                                session.setAttribute("pageSum",pageSum);
+                                session.setAttribute("role","admin");
+                                resp.sendRedirect ("./SetSession");
                             }else {
-                                req.setAttribute("list",list);
-                                req.setAttribute("pageSum",pageSum);
-                                req.getRequestDispatcher("./D20230823/Admin.jsp").forward(req,resp);
+                                session.setAttribute("list",list);
+                                session.setAttribute("pageSum",pageSum);
+                                session.setAttribute("role","admin");
+                                resp.sendRedirect ("./SetSession");
                             }
                         }
                     }
                 } else {
                     resp.setHeader("isEmail-log-exist","2");
-                    req.setAttribute("user",user);
-                    req.getRequestDispatcher("./D20230823/User.jsp").forward(req,resp);
+                    session.setAttribute("user",user);
+                    session.setAttribute("role","person");
+                    resp.sendRedirect ("./SetSession");
                 }
             }else {
                 resp.setHeader("info","password wrong,please input right password");
