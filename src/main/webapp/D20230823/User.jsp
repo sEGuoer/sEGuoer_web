@@ -84,11 +84,11 @@
                                 <li><a class="dropdown-item" href="#myWebsiteck">主页仓库</a></li>
                             </ul>
                         </li>
-                        <a href="./index_login.html" id="hoverfloat">
+                        <div onclick=logoff() id="hoverfloat">
                             <button class="btn btn-danger">
                                 <span class="text-center">注销</span>
                             </button>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,6 +128,19 @@
         </nav>
     </footer>
 </div>
+<script>
+    function logoff() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'clearSession', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xhr.send()
+        xhr.onreadystatechange = function () {
+            if ((xhr.status == 200 || xhr.status == 304) && xhr.readyState == 4){
+                window.location.href = "./index_login.html"
+            }
+        }
+    }
+</script>
 <script src=vite/build/assets/app.js></script>
 </body>
 </html>
