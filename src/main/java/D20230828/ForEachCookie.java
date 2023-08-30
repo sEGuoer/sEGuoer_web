@@ -15,11 +15,12 @@ public class ForEachCookie extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        Cookie cookie1 = new Cookie("key2","value2");
 //        resp.addCookie(cookie1);
-        if (req.getCookies() == null){
+        Cookie[] cookies = req.getCookies();
+        if (cookies == null){
+            resp.getWriter().write("can not find cookie");
         }else {
-            Cookie[] cookies = req.getCookies();
             for (Cookie cookie : cookies){
-                resp.getWriter().write(cookie.getName() +System.lineSeparator());
+                resp.getWriter().write(cookie.getName() + "=" + cookie.getValue() +System.lineSeparator());
             }
         }
     }
