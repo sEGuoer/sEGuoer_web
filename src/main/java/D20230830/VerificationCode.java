@@ -1,12 +1,14 @@
 package D20230830;
 
 
+import com.mysql.cj.Session;
 import jakarta.servlet.ServletException;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -187,7 +189,10 @@ public class VerificationCode extends HttpServlet {
 //        System.out.println("验证码=" + specCaptcha.text());
         // 输出图片流
 //        specCaptcha.out(resp.getOutputStream());
-        System.out.println("验证码="+ text());
+        HttpSession session = req.getSession();
+        String a = text();
+        System.out.println("验证码="+ a);
+        session.setAttribute("VerifyCode",a);
         out(resp.getOutputStream());
 
     }

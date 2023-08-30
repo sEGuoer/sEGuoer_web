@@ -1,4 +1,6 @@
-function pwdverify() {
+
+
+function pwdverifyOnblur() {
     console.log(3)
     let element = document.createElement("div");
     element.innerText = "该邮箱已被注册";
@@ -9,9 +11,7 @@ function pwdverify() {
     xhr.open('POST', 'RegisterVerify', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     let email = document.getElementById("exampleInputEmail1").value
-    let account = document.getElementById("account").value
-    let password = document.getElementById("exampleInputPassword1").value
-    xhr.send("email=" + email + "&account=" + account + "&pwd" + password);
+    xhr.send("email=" + email );
     let accounts = email.split("@");
     console.log(accounts[0])
     if (!document.getElementById("email-check")) {
@@ -20,7 +20,7 @@ function pwdverify() {
     xhr.onreadystatechange = function () {
         console.log(2);
         // readyState == 4说明请求已完成
-        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304) && xhr.getResponseHeader("isEmail-exist") == "kajsldjasdjsalkdjalkdla") {
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304) && (xhr.getResponseHeader("isEmail-exist") == "kajsldjasdjsalkdjalkdla"|| xhr.getResponseHeader("isEmail-exist") == "3")) {
             // 从服务器获得数据
             console.log("add");
             document.getElementById("email-check").style = "";

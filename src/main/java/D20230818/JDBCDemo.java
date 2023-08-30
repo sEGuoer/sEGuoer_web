@@ -67,21 +67,27 @@ public class JDBCDemo {
         }
     }
 
-    public int add(Connection connection, String email, String password, String account) {
+    public int add(Connection connection, String email, String password, String account,boolean a) {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
         User useri = getUser(connection, email);
         boolean isExist = false;
         int i = 0;
         if (useri == null){
+            if (password =="" || account == ""){
+                isExist = true;
+            }
         }else {
             isExist = true;
             if (useri.getAccount().equals(account)){
                 i = 1;
-            }else {
+            }else if (password =="" || account == ""){
+                i = 5;
+            }
+            else {
                 i = 3;
             }
         }
-        if (!isExist) {
+        if (!isExist && a) {
             try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
                 ppstmt.setString(1, email);
                 ppstmt.setString(2, password);
