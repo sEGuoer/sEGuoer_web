@@ -66,6 +66,21 @@ public class JDBCDemo {
             return null;
         }
     }
+    public int getUser_id(Connection connection, String email) {
+        String query = "select id from user where email = ?";
+        try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
+            ppstmt.setString(1, email);
+            ResultSet rs = ppstmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                return id;
+            }
+            return 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
     public int add(Connection connection, String email, String password, String account,boolean a) {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
@@ -99,6 +114,17 @@ public class JDBCDemo {
             }
         }
         return i;
+    }
+    public void add_Operation_record(Connection connection, String email, String time, String operation) {
+        String insertSql = "insert into operation_record(user_id, Time, operation ) values(?, ? ,?);";
+            try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
+                ppstmt.setInt(1, getUser_id(connection,email));
+                ppstmt.setString(2, time);
+                ppstmt.setString(3, operation);
+                ppstmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+        }
     }
     public String soutYourInfo(HttpServletResponse resp, String sout) throws IOException {
         resp.getWriter().write(
@@ -147,6 +173,26 @@ public class JDBCDemo {
             ppstmt.setString(2, account);
             ppstmt.setString(3, password);
             ppstmt.setString(4, updateEmail);
+            ppstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ppstmt != null) {
+                try {
+                    ppstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    public void updateLoginTime(Connection connection, String email, String loginTime) {
+        PreparedStatement ppstmt = null;
+        String updateSql = "update user set loginTime = ? where email = ?";
+        try {
+            ppstmt = connection.prepareStatement(updateSql);
+            ppstmt.setString(1, loginTime);
+            ppstmt.setString(2, email);
             ppstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
