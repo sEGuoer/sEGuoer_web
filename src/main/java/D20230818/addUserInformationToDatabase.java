@@ -49,50 +49,19 @@ public class addUserInformationToDatabase extends HttpServlet {
         Date date = new Date();
         DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String loginTime = dateformat.format(date);
-
         if (user.getUsername().equals("admin")) {
-            resp.setHeader("isEmail-log-exist", "1");
-            List<User> list = jdbcDemo.testPreparedStatement(connection);
-            int pageSum;
-            if (list.size() % 9 == 0) {
-                pageSum = list.size() / 9;
-            } else {
-                pageSum = list.size() / 9 + 1;
-            }
-            if (list.size() < 10) {
-                req.setAttribute("AdminOrUser", "Admin");
-                session.setAttribute("list", list);
-                session.setAttribute("pageSum", pageSum);
-                session.setAttribute("role", "admin");
-            } else {
-                if (req.getParameter("page") == null) {
-                    req.setAttribute("AdminOrUser", "Admin");
-                    session.setAttribute("list", list);
-                    session.setAttribute("pageSum", pageSum);
-                    session.setAttribute("role", "admin");
-                } else {
-                    int page = Integer.parseInt(req.getParameter("page"));
-                    if ((page - 1) * 9 > 0) {
-                        list.subList(0, (page - 1) * 9).clear();
-                        session.setAttribute("list", list);
-                        session.setAttribute("pageSum", pageSum);
-                        session.setAttribute("role", "admin");
-                    } else {
-                        session.setAttribute("list", list);
-                        session.setAttribute("pageSum", pageSum);
-                        session.setAttribute("role", "admin");
-
-                    }
-                }
-            }
-            jdbcDemo.add_Operation_record(connection,email,loginTime,"管理员登录");
+            req.setAttribute("AdminOrUser", "Admin");
+            session.setAttribute("role", "admin");
+            jdbcDemo.add_Operation_record(connection, email, loginTime, "管理员登录");
+            resp.sendRedirect("./GetUserList");
         } else {
-            resp.setHeader("isEmail-log-exist", "2");
             session.setAttribute("user", user);
             session.setAttribute("role", "person");
-            jdbcDemo.add_Operation_record(connection,email,loginTime,"用户登录");
+            jdbcDemo.add_Operation_record(connection, email, loginTime, "用户登录");
+            resp.sendRedirect("./UserInfo");
         }
-        jdbcDemo.updateLoginTime(connection,email,loginTime);
-        resp.sendRedirect("./SetSession");
+        if (req.getParameter("nowPage") == null) {
+            jdbcDemo.updateLoginTime(connection, email, loginTime);
+        }
     }
 }

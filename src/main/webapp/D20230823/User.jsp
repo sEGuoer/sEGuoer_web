@@ -111,9 +111,9 @@
                     个人资料
                 </div>
                 <div class="card-body">
-                    <div><%="用户名&ensp;:"%><span class="ps-5">${user.getAccount()}</span></div>
-                    <div><%="邮&ensp;&ensp;箱&ensp;:"%><span class="ps-5">${user.getEmail()}</span></div>
-                    <div><%="密&ensp;&ensp;码&ensp;:"%><span class="ps-5">${user.getPassword()}</span></div>
+                    <div><%="用户名&ensp;:"%><span class="ps-5" >${user.getAccount()}</span></div>
+                    <div><%="邮&ensp;&ensp;箱&ensp;:"%><span class="ps-5" id="userEmail">${user.getEmail()}</span></div>
+                    <div><%="密&ensp;&ensp;码&ensp;:"%><span class="ps-5">******</span></div>
                 </div>
             </div>
         </div>
@@ -133,10 +133,10 @@
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'clearSession', true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xhr.send()
+        xhr.send("email="+ document.getElementById("userEmail").innerText)
         xhr.onreadystatechange = function () {
             if ((xhr.status == 200 || xhr.status == 304) && xhr.readyState == 4){
-                window.location.href = "./index_login.html"
+                window.location.href = "./"
             }
         }
     }

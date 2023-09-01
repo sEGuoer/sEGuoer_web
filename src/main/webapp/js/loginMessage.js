@@ -20,7 +20,7 @@ function verify() {
         element.style = "display: none"
         element.setAttribute("id", "info-check")
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'noCheckRememberLogin', true);
+        xhr.open('POST', 'SetSession', true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         let email = document.getElementById("exampleInputEmail1").value
         let password = document.getElementById("exampleInputPassword1").value
@@ -79,7 +79,7 @@ function verify() {
                 } else {
                     console.log("delete");
                     document.getElementById("info-check").style = "display: none";
-                    window.location.href = "./noCheckRememberLogin?" + emailAndPassword
+                    window.location.href = "./SetSession"
                 }
             }
 

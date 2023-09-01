@@ -94,46 +94,75 @@ function setAddUserForm() {
 
 
 function nextPage() {
-    const currentUrl = window.location.href;
-    let gotoURL;
-    let currentURL = currentUrl.split("&page=");
-    if (currentURL.length == 1) {
-        gotoURL = currentURL[0] + "&page=2";
-        window.location.href = gotoURL
-    } else {
-        let page = parseInt(currentURL[1]) + 1;
-        gotoURL = currentURL[0] + "&page=" + page;
-        window.location.href = gotoURL
+    console.log(3)
+    let nowPage = parseInt(document.getElementById("nowPage").innerText) ;
+    if (nowPage == parseInt(document.getElementById("pageSum").innerText)){
+    }else{
+        nowPage += 1
+    }
+    let currentURL = window.location.href
+    let currentUrl = currentURL.split("?nowPage=");
+    if (currentUrl.length == 1){
+        let goatURL
+        goatURL = currentURL + "?nowPage=" + nowPage
+        window.location.href = goatURL
+    }else {
+        let goatURL
+        goatURL = currentUrl[0] + "?nowPage=" + nowPage
+        window.location.href = goatURL
     }
 }
 
 function homePage() {
-    const currentUrl = window.location.href;
-    let gotoURL;
-    let currentURL = currentUrl.split("&page=");
-    gotoURL = currentURL[0] + "&page=1";
-    window.location.href = gotoURL
+    console.log(3)
+    let nowPage = "1";
+    let currentURL = window.location.href
+    let currentUrl = currentURL.split("?nowPage=");
+    if (currentUrl.length == 1) {
+        let goatURL
+        goatURL = currentURL + "?nowPage=" + nowPage
+        window.location.href = goatURL
+    } else {
+        let goatURL
+        goatURL = currentUrl[0] + "?nowPage=" + nowPage
+        window.location.href = goatURL
+    }
 }
 function lastPage() {
-    const currentUrl = window.location.href;
     let pageSum = document.getElementById("pageSum").innerText
-    let gotoURL;
-    let currentURL = currentUrl.split("&page=");
-    gotoURL = currentURL[0] + "&page=" + pageSum;
-    window.location.href = gotoURL
+    console.log(3)
+    let currentURL = window.location.href
+    let currentUrl = currentURL.split("?nowPage=");
+    if (currentUrl.length == 1){
+        let goatURL
+        goatURL = currentURL + "?nowPage=" + nowPage
+        window.location.href = goatURL
+    }else {
+        let goatURL
+        goatURL = currentUrl[0] + "?nowPage=" + nowPage
+        window.location.href = goatURL
+    }
 }
 
 function previousPage() {
-    let currentUrl = window.location.href;
-    let gotoURL;
-    let currentURL = currentUrl.split("&page=");
-    if (currentURL.length == 1 || currentURL[1] == 1) {
-        location.reload();
-    } else {
-        let page = parseInt(currentURL[1]) - 1;
-        gotoURL = currentURL[0] + "&page=" + page;
-        window.location.href = gotoURL
+    console.log(3)
+    let nowPage = parseInt(document.getElementById("nowPage").innerText) ;
+    if (nowPage == 1){
+    }else{
+        nowPage -= 1
     }
+    let currentURL = window.location.href
+    let currentUrl = currentURL.split("?nowPage=");
+    if (currentUrl.length == 1){
+        let goatURL
+        goatURL = currentURL + "?nowPage=" + nowPage
+        window.location.href = goatURL
+    }else {
+        let goatURL
+        goatURL = currentUrl[0] + "?nowPage=" + nowPage
+        window.location.href = goatURL
+    }
+
 }
 
 
@@ -317,4 +346,5 @@ function updateInfo() {
     trElement.append(tdElement4)
     addUpdateElement = trElement;
 }
+
 

@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
-@WebFilter("/")
+@WebFilter("/verify")
 public class LoginFilter extends HttpFilter {
 
     private static volatile JDBCDemo jdbcDemo;
@@ -33,7 +33,8 @@ public class LoginFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws IOException, ServletException {
         String email = req.getParameter("email");
         String password = req.getParameter("pwd");
-//        System.out.println(email + " " + password);
+        System.out.println(email + " " + password);
+        System.out.println(req.getAttribute("Content-type"));
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
         User user = jdbcDemo.getUser(connection, email);

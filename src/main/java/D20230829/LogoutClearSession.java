@@ -1,14 +1,11 @@
-package D20230821;
+package D20230829;
 
-import D20230815.User;
 import D20230818.JDBCDemo;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,8 +13,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet("/RegisterVerify")
-public class RegisterVerify extends HttpServlet {
+@WebServlet("/clearSession")
+public class LogoutClearSession extends HttpServlet {
     private static volatile JDBCDemo jdbcDemo;
 
 
@@ -33,19 +30,24 @@ public class RegisterVerify extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+        doPost(req,resp);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        JDBCDemo jdbcDemo = getJdbcTest();
         String email = req.getParameter("email");
+        JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
         Date date = new Date();
         DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String registerTime = dateformat.format(date);
-        jdbcDemo.add_Operation_record(connection,email,registerTime,"用户注册");
-        req.getRequestDispatcher("./verify").forward(req, resp);
+        String logoutTime = dateformat.format(date);
+       if (!email.equals("")){
+           if (email.equals("admin")){
+               jdbcDemo.add_Operation_record(connection,email,logoutTime,"管理员注销");
+           }else {
+               jdbcDemo.add_Operation_record(connection,email,logoutTime,"用户注销");
+           }
+       }
+        req.getSession().invalidate();
     }
 }

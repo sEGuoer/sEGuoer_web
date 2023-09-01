@@ -39,7 +39,11 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large">admin</i>
+                    <div onclick=logoff() id="hoverfloat">
+                        <button class="btn btn-danger">
+                            <span class="text-center">注销</span>
+                        </button>
+                    </div>
                 </a>
             </li>
         </ul>
@@ -152,7 +156,7 @@
                 </div>
                 <div class="card-footer clearfix">
                     <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item">共${pageSum}页</li>
+                        <li class="page-item">当前<span id="nowPage">${nowPage}</span>页，共${pageSum}页</li>
                         <li class="page-item" onclick=homePage()><span class="page-link">«</span></li>
                         <li class="page-item" onclick=previousPage()><span class="page-link">«</span></li>
                         <li class="page-item" onclick=homePage()><span class="page-link">1</span></li>
@@ -175,6 +179,20 @@
 
     <div id="sidebar-overlay"></div>
 </div>
+
+<script>
+    function logoff() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'clearSession', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xhr.send("email=admin")
+        xhr.onreadystatechange = function () {
+            if ((xhr.status == 200 || xhr.status == 304) && xhr.readyState == 4) {
+                window.location.href = "./index_login.html"
+            }
+        }
+    }
+</script>
 <script src="./vite/build/assets/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 <script src="./js/admin.js "></script>
