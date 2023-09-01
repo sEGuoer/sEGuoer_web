@@ -20,7 +20,7 @@ function verify() {
         element.style = "display: none"
         element.setAttribute("id", "info-check")
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'SetSession', true);
+        xhr.open('POST', 'verify', true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         let email = document.getElementById("exampleInputEmail1").value
         let password = document.getElementById("exampleInputPassword1").value
@@ -43,7 +43,6 @@ function verify() {
                 } else {
                     console.log("delete");
                     document.getElementById("info-check").style = "display: none";
-                    window.location.href = "./verify?" + emailAndPassword
                 }
             }
 
@@ -79,7 +78,6 @@ function verify() {
                 } else {
                     console.log("delete");
                     document.getElementById("info-check").style = "display: none";
-                    window.location.href = "./SetSession"
                 }
             }
 
