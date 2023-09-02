@@ -56,7 +56,7 @@ public class addUserInformationToDatabase extends HttpServlet {
             resp.sendRedirect("./GetUserList");
         } else {
             session.setAttribute("user", user);
-            session.setAttribute("role", "person");
+            session.setAttribute("role", "user");
             jdbcDemo.add_Operation_record(connection, email, loginTime, "用户登录");
             resp.sendRedirect("./UserInfo");
         }

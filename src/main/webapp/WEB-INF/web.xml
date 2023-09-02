@@ -4,6 +4,10 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <context-param>
+    <param-name>hello-world</param-name>
+    <param-value>hello-world-value</param-value>
+  </context-param>
   <filter>
     <filter-name>SecondFilter</filter-name>
     <filter-class>D20230831.SecondFilter</filter-class>

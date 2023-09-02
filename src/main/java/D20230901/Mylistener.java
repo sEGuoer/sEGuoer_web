@@ -10,6 +10,7 @@ import java.net.http.WebSocket;
 public class Mylistener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        System.out.println(sce.getServletContext().getInitParameter("hello-world"));
         System.out.println("Mylistenner contextInitialized");
     }
 
