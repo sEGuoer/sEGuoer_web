@@ -1,6 +1,7 @@
 package D20230818;
 
 import D20230815.User;
+import D20230904.DruidDemo;
 import com.mysql.cj.Session;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -19,32 +20,25 @@ import java.util.List;
 
 @WebServlet("/verify")
 public class addUserInformationToDatabase extends HttpServlet {
-    private static volatile JDBCDemo jdbcDemo;
+    private static volatile DruidDemo druidDemo;
 
 
-    public static JDBCDemo getJdbcTest() {
-        if (jdbcDemo == null) {
-            synchronized (JDBCDemo.class) {
-                if (jdbcDemo == null) {
-                    jdbcDemo = new JDBCDemo();
+    public static DruidDemo getdruidDemo() {
+        if (druidDemo == null) {
+            synchronized (DruidDemo.class) {
+                if (druidDemo == null) {
+                    druidDemo = new DruidDemo();
                 }
             }
         }
-        return jdbcDemo;
+        return druidDemo;
     }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        JDBCDemo jdbcDemo = getJdbcTest();
-        Connection connection = jdbcDemo.getConnection();
+        DruidDemo druidDemo = getdruidDemo();
         String email = req.getParameter("email");
-        User user = jdbcDemo.getUser(connection, email);
+        User user = druidDemo.getUser(email);
         resp.setHeader("info", "can found user");
         Date date = new Date();
         DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -52,16 +46,21 @@ public class addUserInformationToDatabase extends HttpServlet {
         if (user.getUsername().equals("admin")) {
             req.setAttribute("AdminOrUser", "Admin");
             session.setAttribute("role", "admin");
-            jdbcDemo.add_Operation_record(connection, email, loginTime, "管理员登录");
+            druidDemo.add_Operation_record(email, loginTime, "管理员登录");
             resp.sendRedirect("./GetUserList");
         } else {
             session.setAttribute("user", user);
             session.setAttribute("role", "user");
-            jdbcDemo.add_Operation_record(connection, email, loginTime, "用户登录");
+            druidDemo.add_Operation_record( email, loginTime, "用户登录");
             resp.sendRedirect("./UserInfo");
         }
         if (req.getParameter("nowPage") == null) {
-            jdbcDemo.updateLoginTime(connection, email, loginTime);
+            druidDemo.updateLoginTime(email, loginTime);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 }
