@@ -112,7 +112,8 @@
             <div class="row  m-4 p-4 mb-5 align-items-center" id="abcde">
                 <div class="d-flex flex-md-row-reverse flex-column align-items-center">
                     <div class="left col-12 col-md-6 text-center text-md-star">
-                        <a href="https://seguoer.github.io/plugInForBilibiliReadingTime/" class="text-info"><h3 class="fs-3" id="chajian">
+                        <a href="https://seguoer.github.io/plugInForBilibiliReadingTime/" class="text-info"><h3
+                                class="fs-3" id="chajian">
                             Bilibili快速阅读插件</h3></a>
                         <h4 class="fs-6 fw-light">适配于分P和合集情况下得知总用时和剩余用时的插件</h4>
                     </div>
@@ -168,7 +169,8 @@
                     <h4 class="fs-6 fw-light">JakartaEE相关内容学习</h4>
                 </div>
                 <img src="img/img_4.png" data-aos="flip-down"
-                     alt="JakartaEE仓库" class="right col-12 col-md-6 text-center text-md-start border rounded-4 shadow">
+                     alt="JakartaEE仓库"
+                     class="right col-12 col-md-6 text-center text-md-start border rounded-4 shadow">
             </div>
             <div class="row  m-4 p-4 mb-5 align-items-center" id="ab">
                 <div class="d-flex flex-md-row-reverse flex-column align-items-center">
@@ -192,7 +194,19 @@
         </div>
     </nav>
 </footer>
-
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'HtmlSevlet', true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        console.log(2);
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+            console.log("add session");
+        }
+        // readyState == 4说明请求已完成
+    }
+</script>
 <script src="vite/build/assets/app.js"></script>
 </body>
 </html>

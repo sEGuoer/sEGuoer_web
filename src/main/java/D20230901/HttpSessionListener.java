@@ -8,8 +8,8 @@ public class HttpSessionListener implements jakarta.servlet.http.HttpSessionList
     private int userCount = 0;
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("HttpSessionListener sessionCreated");
         userCount++;
+        System.out.println("HttpSessionListener sessionCreated"+userCount);
         se.getSession().getServletContext().setAttribute("userCounts",userCount);
 
     }
@@ -18,6 +18,6 @@ public class HttpSessionListener implements jakarta.servlet.http.HttpSessionList
     public void sessionDestroyed(HttpSessionEvent se) {
         userCount--;
         se.getSession().getServletContext().setAttribute("userCounts",userCount);
-        System.out.println("HttpSessionListener sessionDestroyed");
+        System.out.println("HttpSessionListener sessionDestroyed"+userCount);
     }
 }
