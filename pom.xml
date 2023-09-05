@@ -59,6 +59,11 @@
       <artifactId>logback-classic</artifactId>
       <version>1.4.6</version>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.10</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>iae_web2</finalName>
