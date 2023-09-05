@@ -133,13 +133,14 @@ function lastPage() {
     console.log(3)
     let currentURL = window.location.href
     let currentUrl = currentURL.split("?nowPage=");
+    let lastPage = document.getElementById("lastPage").innerText;
     if (currentUrl.length == 1){
         let goatURL
-        goatURL = currentURL + "?nowPage=" + nowPage
+        goatURL = currentURL + "?nowPage=" + lastPage
         window.location.href = goatURL
     }else {
         let goatURL
-        goatURL = currentUrl[0] + "?nowPage=" + nowPage
+        goatURL = currentUrl[0] + "?nowPage=" + lastPage
         window.location.href = goatURL
     }
 }

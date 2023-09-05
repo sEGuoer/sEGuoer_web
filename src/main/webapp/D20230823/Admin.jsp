@@ -160,7 +160,7 @@
                         <li class="page-item" onclick=homePage()><span class="page-link">«</span></li>
                         <li class="page-item" onclick=previousPage()><span class="page-link">«</span></li>
                         <li class="page-item" onclick=homePage()><span class="page-link">1</span></li>
-                        <li class="page-item" id="pageSum" onclick=lastPage()><span class="page-link">${pageSum}</span></li>
+                        <li class="page-item" id="pageSum" onclick=lastPage()><span class="page-link" id="lastPage">${pageSum}</span></li>
                         <li class="page-item" onclick=nextPage()><span class="page-link">»</span></li>
                     </ul>
                 </div>
