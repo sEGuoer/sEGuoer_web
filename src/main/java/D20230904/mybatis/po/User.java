@@ -1,6 +1,13 @@
 package D20230904.mybatis.po;
 
 public class User {
+    public User(String username, String email, String password, String account) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.account = account;
+    }
+
     private String username;
     private String email;
     private String password;

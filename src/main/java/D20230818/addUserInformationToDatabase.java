@@ -2,8 +2,6 @@ package D20230818;
 
 import D20230815.User;
 import D20230904.DruidDemo;
-import com.mysql.cj.Session;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

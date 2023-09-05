@@ -27,4 +27,46 @@
         from user
         where id = #{id}
     </delete>
+
+    <select id="testPreparedStatement">
+        select (id, email , password , username , account)
+        from user
+    </select>
+
+    <select id="getUser" resultType="User">
+        select *
+        from user
+        where email = #{email}
+    </select>
+
+    <select id="getUser_id" resultType="int">
+        select id
+        from user
+        where email =#{email}
+    </select>
+
+    <insert id="add_Operation_record" useGeneratedKeys="true">
+        insert into operation_record  (user_id, Time, operation)
+        values (#{user_id}, #{time} ,#{operation})
+    </insert>
+
+    <delete id="delete">
+        delete
+        from user
+        where email = #{email}
+    </delete>
+
+    <update id="update">
+        update user
+        set email    = #{email},
+            account = #{account},
+            password = #{password}
+        where email = #{email}
+    </update>
+
+    <update id="updateLoginTime">
+        update user
+        set loginTime    = #{loginTime}
+        where email = #{email}
+    </update>
 </mapper>

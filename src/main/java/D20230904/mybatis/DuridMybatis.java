@@ -43,8 +43,7 @@ public class DuridMybatis {
                 String password = rs.getString("password");
                 String username = rs.getString("username");
                 String account = rs.getString("account");
-                User user = new User();
-                user.setUser(username, email, password, account);
+                User user = new User(username, email, password, account);
                 list.add(user);
                 System.out.println(id + "\t" + email + "\t" + password + "\t" + username + account);
             }
@@ -66,8 +65,7 @@ public class DuridMybatis {
                 String password = rs.getString("password");
                 String username = rs.getString("username");
                 String account = rs.getString("account");
-                User user = new User();
-                user.setUser(username, dataEmail, password, account);
+                User user = new User(username, dataEmail, password, account);
                 System.out.println(id + "\t" + dataEmail + "\t" + password + "\t" + username + account);
                 return user;
             }

@@ -75,7 +75,7 @@ public class DruidDemo {
         }
     }
 
-    public int getUser_id( String email) {
+    public int getUser_id(String email) {
         String query = "select id from user where email = ?";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(query)) {
             ppstmt.setString(1, email);

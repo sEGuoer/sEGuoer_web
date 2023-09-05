@@ -22,8 +22,10 @@ public class Test {
 
         SqlSession session = sqlSessionFactory.openSession();
         UserMapper mapper = session.getMapper(UserMapper.class);
+        User user1 = mapper.selectUser(1);
         int id = mapper.insertUser(user);
         session.commit();
         System.out.println(id);
+        System.out.println(user1);
     }
 }
