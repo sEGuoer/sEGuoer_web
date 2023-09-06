@@ -2,7 +2,6 @@ package D20230818;
 
 import D20230904.mybatis.po.User;
 import D20230906.UserDAO;
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.*;
@@ -44,7 +43,7 @@ public class JDBCDemo implements UserDAO {
         return null;
     }
 
-    public User getUser( String email) {
+    public User getUser(String email) {
         String query = "select id, email, password, username, account from user where email = ?";
         try (PreparedStatement ppstmt = getConnection().prepareStatement(query)) {
             ppstmt.setString(1, email);
@@ -65,6 +64,7 @@ public class JDBCDemo implements UserDAO {
             return null;
         }
     }
+
     public int getUser_id(String email) {
         String query = "select id from user where email = ?";
         try (PreparedStatement ppstmt = getConnection().prepareStatement(query)) {
@@ -81,23 +81,22 @@ public class JDBCDemo implements UserDAO {
         }
     }
 
-    public int add( String email, String password, String account,boolean a) {
+    public int add(String email, String password, String account, boolean a) {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
         User useri = getUser(email);
         boolean isExist = false;
         int i = 0;
-        if (useri == null){
-            if (password =="" || account == ""){
+        if (useri == null) {
+            if (password == "" || account == "") {
                 isExist = true;
             }
-        }else {
+        } else {
             isExist = true;
-            if (useri.getAccount().equals(account)){
+            if (useri.getAccount().equals(account)) {
                 i = 1;
-            }else if (password =="" || account == ""){
+            } else if (password == "" || account == "") {
                 i = 5;
-            }
-            else {
+            } else {
                 i = 3;
             }
         }
@@ -114,37 +113,22 @@ public class JDBCDemo implements UserDAO {
         }
         return i;
     }
-    public int add_Operation_record( int id, String time, String operation) {
+
+    public int add_Operation_record(int id, String time, String operation) {
         String insertSql = "insert into operation_record(user_id, Time, operation ) values(?, ? ,?);";
-            try (PreparedStatement ppstmt = getConnection().prepareStatement(insertSql)) {
-                ppstmt.setInt(1, id);
-                ppstmt.setString(2, time);
-                ppstmt.setString(3, operation);
-                ppstmt.executeUpdate();
-                return  1;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return  0;
+        try (PreparedStatement ppstmt = getConnection().prepareStatement(insertSql)) {
+            ppstmt.setInt(1, id);
+            ppstmt.setString(2, time);
+            ppstmt.setString(3, operation);
+            ppstmt.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
     }
-    public String soutYourInfo(HttpServletResponse resp, String sout) throws IOException {
-        resp.getWriter().write(
-                "<!doctype html>\n" +
-                        "<html lang=\"en\">\n" +
-                        "<head>\n" +
-                        "    <meta charset=\"UTF-8\">\n" +
-                        "    <meta name=\"viewport\"\n" +
-                        "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                        "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                        "    <title>sEGuoer's_website</title>" +
-                        "</head>\n" +
-                        "<body>\n" +
-                        "<p>" + sout + "</p>" +
-                        "</body>\n" +
-                        "</html>\n"
-        );
-        return sout;
-    }
+
+
 
     public int delete(String email) {
         PreparedStatement ppstmt = null;
@@ -164,9 +148,11 @@ public class JDBCDemo implements UserDAO {
                     e.printStackTrace();
                 }
             }
-        }return 0;
+        }
+        return 0;
     }
-    public int update( String email, String account,String password,String updateEmail) {
+
+    public int update(String email, String account, String password, String updateEmail) {
         PreparedStatement ppstmt = null;
         String updateSql = "update user set email = ? , account = ? , password = ? where email = ?";
         try {
@@ -187,9 +173,11 @@ public class JDBCDemo implements UserDAO {
                     e.printStackTrace();
                 }
             }
-        }return 0;
+        }
+        return 0;
     }
-    public int updateLoginTime( String email, String loginTime) {
+
+    public int updateLoginTime(String email, String loginTime) {
         PreparedStatement ppstmt = null;
         String updateSql = "update user set loginTime = ? where email = ?";
         try {
@@ -208,11 +196,40 @@ public class JDBCDemo implements UserDAO {
                     e.printStackTrace();
                 }
             }
-        }return 0;
+        }
+        return 0;
     }
 
+    public List<User> searchUser(String searchName) {
+        String query = "select id, email, password, username, account from user where email LIKE ?";
+        try (PreparedStatement ppstmt = getConnection().prepareStatement(query)) {
+            ppstmt.setString(1, searchName);
+            ResultSet rs = ppstmt.executeQuery();
+            List<User> userList = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String dataEmail = rs.getString("email");
+                String password = rs.getString("password");
+                String username = rs.getString("username");
+                String account = rs.getString("account");
+                User user = new User(username, dataEmail, password, account);
+                System.out.println(id + "\t" + dataEmail + "\t" + password + "\t" + username + account);
+                userList.add(user);
+            }
+            return userList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public void DeleteManyUser(List<User> userList) {
+        for (User user : userList) {
+            delete(user.getEmail());
+        }
+    }
     public static void main(String[] args) {
-//        JDBCDemo jdbcTest = new JDBCDemo();
+        UserDAO jdbcTest = new JDBCDemo();
+        System.out.println(jdbcTest.searchUser("%709074535@qq.com%"));
 //        Connection connection = jdbcTest.getConnection();
 //        jdbcTest.getUser(connection, "admin@1");
 //        jdbcTest.testPreparedStatement(connection);

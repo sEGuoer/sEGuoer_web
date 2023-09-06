@@ -1,8 +1,9 @@
 package D20230825;
 
 
-import D20230815.User;
+
 import D20230818.JDBCDemo;
+import D20230904.mybatis.po.User;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -44,8 +45,6 @@ public class updateOnblur extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         JDBCDemo jdbcTest = new JDBCDemo();
         setJdbcTest(jdbcTest);
-        User user = new User();
-        setUser(user);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -53,7 +52,7 @@ public class updateOnblur extends HttpServlet {
         System.out.println(email);
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        setUser(jdbcDemo.getUser(connection,email));
+        setUser(jdbcDemo.getUser(email));
         if (getUser() == null){
             resp.setHeader("isEmail-exist","1");
         }else {

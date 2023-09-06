@@ -17,4 +17,8 @@ public interface UserDAO {
     public int update( String email, String account,String password,String updateEmail);
     public int updateLoginTime( String email, String loginTime);
 
+    public default List<User> searchUser(String searchName) {
+        return null;
+    }
+
 }

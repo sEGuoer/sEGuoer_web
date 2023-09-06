@@ -2,3 +2,5 @@
 17:12:45 [main] INFO  D20230905.HelloSlf4j - Hello World haha
 17:14:45.507 [main] INFO  D20230905.HelloSlf4j - Hello World haha
 17:14:57 [main] INFO  D20230905.HelloSlf4j - Hello World haha
+14:54:08 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+14:55:42 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited

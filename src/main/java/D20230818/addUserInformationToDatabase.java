@@ -1,7 +1,7 @@
 package D20230818;
 
-import D20230815.User;
 import D20230904.DruidDemo;
+import D20230904.mybatis.po.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet("/verify")
+//@WebServlet("/verify")
 public class addUserInformationToDatabase extends HttpServlet {
     private static volatile DruidDemo druidDemo;
 

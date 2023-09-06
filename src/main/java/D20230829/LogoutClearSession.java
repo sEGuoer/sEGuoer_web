@@ -43,9 +43,9 @@ public class LogoutClearSession extends HttpServlet {
         String logoutTime = dateformat.format(date);
        if (!email.equals("")){
            if (email.equals("admin")){
-               jdbcDemo.add_Operation_record(connection,email,logoutTime,"管理员注销");
+               jdbcDemo.add_Operation_record(jdbcDemo.getUser_id(email),logoutTime,"管理员注销");
            }else {
-               jdbcDemo.add_Operation_record(connection,email,logoutTime,"用户注销");
+               jdbcDemo.add_Operation_record(jdbcDemo.getUser_id(email) ,logoutTime,"用户注销");
            }
        }
         req.getSession().invalidate();

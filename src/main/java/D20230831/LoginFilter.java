@@ -1,6 +1,6 @@
 package D20230831;
 
-import D20230815.User;
+import D20230904.mybatis.po.User;
 import D20230818.JDBCDemo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -37,7 +37,7 @@ public class LoginFilter extends HttpFilter {
         System.out.println(req.getAttribute("Content-type"));
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        User user = jdbcDemo.getUser(connection, email);
+        User user = jdbcDemo.getUser( email);
         req.setAttribute("email",email);
         System.out.println(user == null);
         resp.setHeader("isEmail-log-exist","2");

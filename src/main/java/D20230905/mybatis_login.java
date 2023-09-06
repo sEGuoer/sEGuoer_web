@@ -4,6 +4,7 @@ import D20230904.mybatis.mapper.UserMapper;
 import D20230904.mybatis.po.User;
 import jakarta.servlet.ServletException;
 
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//@WebServlet("/verify")
+@WebServlet("/verify")
 public class mybatis_login extends HttpServlet {
     private static SqlSessionFactory sqlSessionFactory;
 

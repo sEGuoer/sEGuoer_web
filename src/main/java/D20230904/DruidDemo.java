@@ -1,7 +1,8 @@
 package D20230904;
 
 
-import D20230815.User;
+import D20230904.mybatis.po.User;
+import D20230906.UserDAO;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class DruidDemo {
+public class DruidDemo implements UserDAO {
     private static DataSource dataSource;
 
     static {
@@ -30,7 +31,7 @@ public class DruidDemo {
     }
 
     public List<User> testPreparedStatement() {
-        String query = "select id, email, password, username, account from user";
+        String query = "select id, email, password, username, account from user ";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(query);) {
             List<User> list = new ArrayList<>();
             ResultSet rs = ppstmt.executeQuery();
@@ -40,8 +41,7 @@ public class DruidDemo {
                 String password = rs.getString("password");
                 String username = rs.getString("username");
                 String account = rs.getString("account");
-                User user = new User();
-                user.setUser(username, email, password, account);
+                User user = new User(username, email, password, account);
                 list.add(user);
                 System.out.println(id + "\t" + email + "\t" + password + "\t" + username + account);
             }
@@ -53,7 +53,7 @@ public class DruidDemo {
     }
 
     public User getUser( String email) {
-        String query = "select id, email, password, username, account from user where email = ?";
+        String query = "select id, email, password, username, account from user where email = ? LIKE " ;
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(query)) {
             ppstmt.setString(1, email);
             ResultSet rs = ppstmt.executeQuery();
@@ -63,8 +63,7 @@ public class DruidDemo {
                 String password = rs.getString("password");
                 String username = rs.getString("username");
                 String account = rs.getString("account");
-                User user = new User();
-                user.setUser(username, dataEmail, password, account);
+                User user = new User(username, email, password, account);
                 System.out.println(id + "\t" + dataEmail + "\t" + password + "\t" + username + account);
                 return user;
             }
@@ -124,6 +123,11 @@ public class DruidDemo {
         return i;
     }
 
+    @Override
+    public int add_Operation_record(int id, String time, String operation) {
+        return 0;
+    }
+
     public void add_Operation_record( String email, String time, String operation) {
         String insertSql = "insert into operation_record(user_id, Time, operation ) values(?, ? ,?);";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
@@ -136,7 +140,7 @@ public class DruidDemo {
         }
     }
 
-    public void delete( String email) {
+    public int delete(String email) {
         PreparedStatement ppstmt = null;
         String updateSql = "delete from user where email = ?";
         try {
@@ -154,9 +158,10 @@ public class DruidDemo {
                 }
             }
         }
+        return 0;
     }
 
-    public void update( String email, String account, String password, String updateEmail) {
+    public int update(String email, String account, String password, String updateEmail) {
         PreparedStatement ppstmt = null;
         String updateSql = "update user set email = ? , account = ? , password = ? where email = ?";
         try {
@@ -177,9 +182,10 @@ public class DruidDemo {
                 }
             }
         }
+        return 0;
     }
 
-    public void updateLoginTime( String email, String loginTime) {
+    public int updateLoginTime(String email, String loginTime) {
         PreparedStatement ppstmt = null;
         String updateSql = "update user set loginTime = ? where email = ?";
         try {
@@ -198,6 +204,12 @@ public class DruidDemo {
                 }
             }
         }
+        return 0;
+    }
+
+    @Override
+    public List<User> searchUser(String searchName) {
+        return UserDAO.super.searchUser(searchName);
     }
 
     public static void main(String[] args) {

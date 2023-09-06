@@ -33,7 +33,23 @@ public class addUser extends HttpServlet {
         JDBCDemo jdbcTest = new JDBCDemo();
         setJdbcTest(jdbcTest);
     }
-
+public void soutYourInfo(HttpServletResponse resp,String info) throws IOException {
+    resp.getWriter().write(
+            "<!doctype html>\n" +
+                    "<html lang=\"en\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <meta name=\"viewport\"\n" +
+                    "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
+                    "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                    "    <title>sEGuoer's_website</title>" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "<p>" + info + "</p>" +
+                    "</body>\n" +
+                    "</html>\n"
+    );
+}
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
@@ -43,16 +59,16 @@ public class addUser extends HttpServlet {
         Connection connection = jdbcDemo.getConnection();
         int panduan = jdbcDemo.add( email, password, account,true);
         if (panduan == 0) {
-            jdbcDemo.soutYourInfo(resp, "添加成功");
+            soutYourInfo(resp, "添加成功");
             resp.sendRedirect("./verify?email=admin@1&pwd=zcy520521");
         } else if (panduan == 1) {
             resp.setHeader("isEmail-exist","kajsldjasdjsalkdjalkdla");
-            jdbcDemo.soutYourInfo(resp, "账号和邮箱都重复，请重新添加");
+            soutYourInfo(resp, "账号和邮箱都重复，请重新添加");
         } else if (panduan == 2) {
-            jdbcDemo.soutYourInfo(resp, "账号重复，请重新添加");
+            soutYourInfo(resp, "账号重复，请重新添加");
         } else if (panduan == 3) {
             resp.setHeader("isEmail-exist","kajsldjasdjsalkdjalkdla");
-            jdbcDemo.soutYourInfo(resp, "邮箱重复，请重新添加");
+            soutYourInfo(resp, "邮箱重复，请重新添加");
         }
     }
 }

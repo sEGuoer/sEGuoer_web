@@ -1,6 +1,6 @@
 package D20230821;
 
-import D20230815.User;
+import D20230904.mybatis.po.User;
 import D20230818.JDBCDemo;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -45,7 +45,7 @@ public class RegisterVerify extends HttpServlet {
         Date date = new Date();
         DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String registerTime = dateformat.format(date);
-        jdbcDemo.add_Operation_record(connection,email,registerTime,"用户注册");
+        jdbcDemo.add_Operation_record(jdbcDemo.getUser_id(email),registerTime,"用户注册");
         req.getRequestDispatcher("./verify").forward(req, resp);
     }
 }
