@@ -205,7 +205,39 @@
             }
         }
     }
+    let deleteManyUserIsExist = false
+    function deleteManyUser() {
+        if (deleteManyUserIsExist === false) {
+            let checkboxInput = document.createElement("input")
+            checkboxInput.className = "flexCheckIndeterminate form-check-input"
+            checkboxInput.type = "checkbox"
+            checkboxInput.value = ""
+
+            let checkboxLabel = document.createElement("label")
+            checkboxLabel.className = "flexCheckIndeterminatelabel form-check-label"
+            checkboxLabel.setAttribute("for","flexCheckIndeterminate")
+            $("span.number").before(checkboxInput)
+            $("span.number").before(checkboxLabel)
+            deleteManyUserIsExist = true;
+            console.log(false)
+        } else if (deleteManyUserIsExist === true) {
+            var x = document.querySelectorAll(".flexCheckIndeterminate")
+            var i2;
+            for (i2 = 0 ; i2< x.length ; i2++){
+                x[i2].remove()
+            }
+            var y = document.querySelectorAll(".flexCheckIndeterminatelabel")
+            var i1;
+            for (i1 = 0 ; i1< y.length ; i1++){
+                y[i1].remove()
+            }
+            deleteManyUserIsExist = false;
+            console.log(true)
+        }
+    }
 </script>
+
+<script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="./vite/build/assets/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 <script src="./js/admin.js "></script>
