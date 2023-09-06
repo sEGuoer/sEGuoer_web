@@ -55,7 +55,7 @@ public class updateUser extends HttpServlet {
         String update = req.getParameter("updateEmail");
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        jdbcDemo.update(connection,email,account,password,update);
+        jdbcDemo.update(email,account,password,update);
     }
 }
 

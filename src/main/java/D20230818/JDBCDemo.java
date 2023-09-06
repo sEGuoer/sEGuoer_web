@@ -1,6 +1,7 @@
 package D20230818;
 
-import D20230815.User;
+import D20230904.mybatis.po.User;
+import D20230906.UserDAO;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCDemo {
+public class JDBCDemo implements UserDAO {
     public Connection getConnection() {
         Connection conn;
         try {
@@ -21,9 +22,9 @@ public class JDBCDemo {
         return conn;
     }
 
-    public List<User> testPreparedStatement(Connection connection) {
+    public List<User> testPreparedStatement() {
         String query = "select id, email, password, username, account from user";
-        try (PreparedStatement ppstmt = connection.prepareStatement(query);) {
+        try (PreparedStatement ppstmt = getConnection().prepareStatement(query);) {
             List<User> list = new ArrayList<>();
             ResultSet rs = ppstmt.executeQuery();
             while (rs.next()) {
@@ -32,8 +33,7 @@ public class JDBCDemo {
                 String password = rs.getString("password");
                 String username = rs.getString("username");
                 String account = rs.getString("account");
-                User user = new User();
-                user.setUser(username, email, password, account);
+                User user = new User(username, email, password, account);
                 list.add(user);
                 System.out.println(id + "\t" + email + "\t" + password + "\t" + username + account);
             }
@@ -44,9 +44,9 @@ public class JDBCDemo {
         return null;
     }
 
-    public User getUser(Connection connection, String email) {
+    public User getUser( String email) {
         String query = "select id, email, password, username, account from user where email = ?";
-        try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
+        try (PreparedStatement ppstmt = getConnection().prepareStatement(query)) {
             ppstmt.setString(1, email);
             ResultSet rs = ppstmt.executeQuery();
             while (rs.next()) {
@@ -55,8 +55,7 @@ public class JDBCDemo {
                 String password = rs.getString("password");
                 String username = rs.getString("username");
                 String account = rs.getString("account");
-                User user = new User();
-                user.setUser(username, dataEmail, password, account);
+                User user = new User(username, dataEmail, password, account);
                 System.out.println(id + "\t" + dataEmail + "\t" + password + "\t" + username + account);
                 return user;
             }
@@ -66,9 +65,9 @@ public class JDBCDemo {
             return null;
         }
     }
-    public int getUser_id(Connection connection, String email) {
+    public int getUser_id(String email) {
         String query = "select id from user where email = ?";
-        try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
+        try (PreparedStatement ppstmt = getConnection().prepareStatement(query)) {
             ppstmt.setString(1, email);
             ResultSet rs = ppstmt.executeQuery();
             while (rs.next()) {
@@ -82,9 +81,9 @@ public class JDBCDemo {
         }
     }
 
-    public int add(Connection connection, String email, String password, String account,boolean a) {
+    public int add( String email, String password, String account,boolean a) {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
-        User useri = getUser(connection, email);
+        User useri = getUser(email);
         boolean isExist = false;
         int i = 0;
         if (useri == null){
@@ -103,7 +102,7 @@ public class JDBCDemo {
             }
         }
         if (!isExist && a) {
-            try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
+            try (PreparedStatement ppstmt = getConnection().prepareStatement(insertSql)) {
                 ppstmt.setString(1, email);
                 ppstmt.setString(2, password);
                 ppstmt.setString(3, "person");
@@ -115,15 +114,17 @@ public class JDBCDemo {
         }
         return i;
     }
-    public void add_Operation_record(Connection connection, String email, String time, String operation) {
+    public int add_Operation_record( int id, String time, String operation) {
         String insertSql = "insert into operation_record(user_id, Time, operation ) values(?, ? ,?);";
-            try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
-                ppstmt.setInt(1, getUser_id(connection,email));
+            try (PreparedStatement ppstmt = getConnection().prepareStatement(insertSql)) {
+                ppstmt.setInt(1, id);
                 ppstmt.setString(2, time);
                 ppstmt.setString(3, operation);
                 ppstmt.executeUpdate();
+                return  1;
             } catch (SQLException e) {
                 e.printStackTrace();
+                return  0;
         }
     }
     public String soutYourInfo(HttpServletResponse resp, String sout) throws IOException {
@@ -145,13 +146,14 @@ public class JDBCDemo {
         return sout;
     }
 
-    public void delete(Connection connection,String email) {
+    public int delete(String email) {
         PreparedStatement ppstmt = null;
         String updateSql = "delete from user where email = ?";
         try {
-            ppstmt = connection.prepareStatement(updateSql);
+            ppstmt = getConnection().prepareStatement(updateSql);
             ppstmt.setString(1, email);
             ppstmt.executeUpdate();
+            return 1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -162,18 +164,19 @@ public class JDBCDemo {
                     e.printStackTrace();
                 }
             }
-        }
+        }return 0;
     }
-    public void update(Connection connection, String email, String account,String password,String updateEmail) {
+    public int update( String email, String account,String password,String updateEmail) {
         PreparedStatement ppstmt = null;
         String updateSql = "update user set email = ? , account = ? , password = ? where email = ?";
         try {
-            ppstmt = connection.prepareStatement(updateSql);
+            ppstmt = getConnection().prepareStatement(updateSql);
             ppstmt.setString(1, email);
             ppstmt.setString(2, account);
             ppstmt.setString(3, password);
             ppstmt.setString(4, updateEmail);
             ppstmt.executeUpdate();
+            return 1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -184,16 +187,17 @@ public class JDBCDemo {
                     e.printStackTrace();
                 }
             }
-        }
+        }return 0;
     }
-    public void updateLoginTime(Connection connection, String email, String loginTime) {
+    public int updateLoginTime( String email, String loginTime) {
         PreparedStatement ppstmt = null;
         String updateSql = "update user set loginTime = ? where email = ?";
         try {
-            ppstmt = connection.prepareStatement(updateSql);
+            ppstmt = getConnection().prepareStatement(updateSql);
             ppstmt.setString(1, loginTime);
             ppstmt.setString(2, email);
             ppstmt.executeUpdate();
+            return 1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -204,7 +208,7 @@ public class JDBCDemo {
                     e.printStackTrace();
                 }
             }
-        }
+        }return 0;
     }
 
     public static void main(String[] args) {

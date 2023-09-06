@@ -1,6 +1,6 @@
 package D20230829;
 
-import D20230815.User;
+import D20230904.mybatis.po.User;
 import D20230818.JDBCDemo;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -46,7 +46,7 @@ public class noCheckRememberLogin extends HttpServlet {
 //        System.out.println(email + " " + password);
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        User user = jdbcDemo.getUser(connection, email);
+        User user = jdbcDemo.getUser(email);
         System.out.println(user == null);
         resp.setHeader("isEmail-log-exist","2");
         if (user == null) {
@@ -57,7 +57,7 @@ public class noCheckRememberLogin extends HttpServlet {
                 resp.setHeader("info","can found user");
                 if (user.getUsername().equals("admin")) {
                     resp.setHeader("isEmail-log-exist","1");
-                    List<User> list = jdbcDemo.testPreparedStatement(connection);
+                    List<User> list = jdbcDemo.testPreparedStatement();
                     int pageSum;
                     if (list.size()%9 == 0){
                         pageSum = list.size()/9;

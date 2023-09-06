@@ -1,6 +1,6 @@
 package D20230901;
 
-import D20230815.User;
+import D20230904.mybatis.po.User;
 import D20230818.JDBCDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -46,7 +46,7 @@ public class GetUserList extends HttpServlet {
         }
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        List<User> userList = jdbcDemo.testPreparedStatement(connection);
+        List<User> userList = jdbcDemo.testPreparedStatement();
         int pageSum = GetpageSum(userList);
         if ((nowPage - 1) * 9 > 0) {
             userList.subList(0, (nowPage - 1) * 9).clear();

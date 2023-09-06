@@ -38,7 +38,6 @@ public class deleteUser extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         JDBCDemo jdbcDemo = getJdbcTest();
-        Connection connection = jdbcDemo.getConnection();
-        jdbcDemo.delete(connection,email);
+        jdbcDemo.delete(email);
     }
 }

@@ -41,7 +41,7 @@ public class RegisterFilter extends HttpFilter {
         HttpSession session = req.getSession();
         String sessionCode = (String) session.getAttribute("VerifyCode");
         System.out.println(sessionCode.equals(verifyCode));
-        int panduan = jdbcDemo.add(connection, email, password, account,sessionCode.equals(verifyCode));
+        int panduan = jdbcDemo.add( email, password, account,sessionCode.equals(verifyCode));
         if (panduan == 5 ){
             resp.setHeader("isEmail-exist", "kajsldjasdjsalkdjalkdla");
         }else {

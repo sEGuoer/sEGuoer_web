@@ -41,7 +41,7 @@ public class addUser extends HttpServlet {
         String account = req.getParameter("account");
         JDBCDemo jdbcDemo = getJdbcTest();
         Connection connection = jdbcDemo.getConnection();
-        int panduan = jdbcDemo.add(connection, email, password, account,true);
+        int panduan = jdbcDemo.add( email, password, account,true);
         if (panduan == 0) {
             jdbcDemo.soutYourInfo(resp, "添加成功");
             resp.sendRedirect("./verify?email=admin@1&pwd=zcy520521");
