@@ -128,21 +128,25 @@
                 <div class="card-body">
                     <table class="table mb-0">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">
+                                <div class="form-check">
+                                    <span>#</span>
+                                </div>
+                            </th>
                             <th scope="col">Email</th>
                             <th scope="col">Password</th>
                             <th scope="col">Account</th>
-                            <th scope="col"><button class="btn btn-danger">
-                                <span class="text-center">批量删除</span>
-                            </button></th>
+                            <th scope="col">
+                                <button class="btn btn-danger">
+                                    <span class="text-center" onclick="deleteManyUser()">批量删除</span>
+                                </button>
+                            </th>
                         </tr>
                         <c:forEach items="${list}" var="user" begin="0" end="8" varStatus="i">
                             <tr id="${user.getEmail()}">
                                 <th scope="col">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                                        <label class="form-check-label" for="flexCheckIndeterminate">
-                                        </label>${i.count}
+                                        </label><span class="number"> ${i.count}</span>
                                     </div>
                                 </th>
                                 <td>${user.getEmail()}</td>
@@ -168,7 +172,8 @@
                         <li class="page-item" onclick=homePage()><span class="page-link">«</span></li>
                         <li class="page-item" onclick=previousPage()><span class="page-link">«</span></li>
                         <li class="page-item" onclick=homePage()><span class="page-link">1</span></li>
-                        <li class="page-item" id="pageSum" onclick=lastPage()><span class="page-link" id="lastPage">${pageSum}</span></li>
+                        <li class="page-item" id="pageSum" onclick=lastPage()><span class="page-link"
+                                                                                    id="lastPage">${pageSum}</span></li>
                         <li class="page-item" onclick=nextPage()><span class="page-link">»</span></li>
                     </ul>
                 </div>

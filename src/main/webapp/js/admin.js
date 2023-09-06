@@ -92,7 +92,46 @@ function setAddUserForm() {
     console.log("loading")
 }
 
+let deleteManyUserIsExist = false
+function deleteManyUser() {
+    if (deleteManyUserIsExist === false) {
+        let checkboxInput = document.createElement("input")
+        checkboxInput.className = "flexCheckIndeterminate form-check-input"
+        checkboxInput.type = "checkbox"
+        checkboxInput.value = ""
 
+        let checkboxLabel = document.createElement("label")
+        checkboxLabel.className = "flexCheckIndeterminatelabel form-check-label"
+        checkboxLabel.setAttribute("for","flexCheckIndeterminate")
+        let allDeleteCheckbox = document.querySelectorAll(".number")
+        allDeleteCheckbox.forEach(everyCheckbox =>{
+            everyCheckbox.before(checkboxInput)
+            everyCheckbox.before(checkboxLabel)
+            everyCheckbox.style.backgroundColor = "red"
+            console.log(everyCheckbox)
+        })
+        deleteManyUserIsExist = true;
+        console.log(false)
+    } else if (deleteManyUserIsExist === true) {
+        var x = document.querySelectorAll(".flexCheckIndeterminate")
+        var i2;
+        for (i2 = 0 ; i2< x.length ; i2++){
+            x[i2].remove()
+        }
+        var y = document.querySelectorAll(".flexCheckIndeterminatelabel")
+        var i1;
+        for (i1 = 0 ; i1< y.length ; i1++){
+            y[i1].remove()
+        }
+        deleteManyUserIsExist = false;
+        console.log(true)
+    }
+}
+
+function selectUserCheckbox(){
+
+
+}
 function nextPage() {
     console.log(3)
     let nowPage = parseInt(document.getElementById("nowPage").innerText) ;
