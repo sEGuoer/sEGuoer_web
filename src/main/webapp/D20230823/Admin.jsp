@@ -132,11 +132,19 @@
                             <th scope="col">Email</th>
                             <th scope="col">Password</th>
                             <th scope="col">Account</th>
-                            <th scope="col"></th>
+                            <th scope="col"><button class="btn btn-danger">
+                                <span class="text-center">批量删除</span>
+                            </button></th>
                         </tr>
                         <c:forEach items="${list}" var="user" begin="0" end="8" varStatus="i">
                             <tr id="${user.getEmail()}">
-                                <th scope="col">${i.count}</th>
+                                <th scope="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                                        <label class="form-check-label" for="flexCheckIndeterminate">
+                                        </label>${i.count}
+                                    </div>
+                                </th>
                                 <td>${user.getEmail()}</td>
                                 <td>${user.getPassword()}</td>
                                 <td>${user.getAccount()} </td>
