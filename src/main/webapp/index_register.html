@@ -112,12 +112,21 @@
                         <label for="exampleInputPassword1" class="form-label">密码</label>
                         <input type="password" class="form-control" name="pwd" id="exampleInputPassword1">
                     </div>
-                  <div class="mb-3 text-start">
+                    <div class="mb-3 text-start">
                         <label for="exampleInputPassword1" class="form-label">验证码</label>
                         <input type="text" class="form-control" name="VerifyCode" id="exampleVerificationCode">
                     </div>
-                  <div class="mb-3 text-start">
-                    <img src="VerificationCode" alt="验证码"  id="VerificationCode" onclick=refreshCode()>
+                    <div class="mb-3 text-start">
+                        <div class="btn-group me-2" role="group">
+                            <span id="emailVerify" onclick="emailVerify()"><button
+                                    type="button" class="btn btn-primary">邮箱验证</button>
+                            </span>
+                            <span id="refreshCodeVerify" onclick="refreshCodeVerify()"><button
+                                    type="button" class="btn btn-primary">验证码验证</button>
+                            </span>
+                        </div>
+                        <img src="VerificationCode" alt="验证码" id="VerificationCode" onclick=refreshCode()
+                             style="display: none">
                     </div>
                     <div class="text-start">
                         <button type="submit" class="btn btn-danger">注册</button>
@@ -137,8 +146,22 @@
     </footer>
 </div>
 <script>
+    function emailVerify() {
+        document.getElementById("refreshCodeVerify").setAttribute("style", "display: none");
+        document.getElementById("emailVerify").setAttribute("style", "display: none");
+        alert("验证码已发送到邮件中");
+    }
+
+    function refreshCodeVerify() {
+        let verifyCode = document.getElementById("VerificationCode");
+        document.getElementById("refreshCodeVerify").setAttribute("style", "display: none");
+        document.getElementById("emailVerify").setAttribute("style", "display: none");
+        verifyCode.setAttribute("style", "");
+        verifyCode.click();
+    }
+
     function refreshCode() {
-        document.getElementById("VerificationCode").src = "VerificationCode?"+Math.random()
+        document.getElementById("VerificationCode").src = "VerificationCode?" + Math.random();
     }
 </script>
 <script src="vite/build/assets/app.js"></script>
