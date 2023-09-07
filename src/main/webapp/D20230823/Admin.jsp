@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right" id="UserList">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Home(测试checked)</a></li>
                             <li class="breadcrumb-item active">
                                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                     <div class="btn-group me-2" role="group" aria-label="First group">
@@ -193,6 +193,12 @@
     <div id="sidebar-overlay"></div>
 </div>
 
+<script>
+    var a = $(".form-check .flexCheckIndeterminate")
+    if (a.prop("checked") == true) {
+        console.log("delete")
+    }
+</script>
 <script>
     function logoff() {
         var xhr = new XMLHttpRequest();

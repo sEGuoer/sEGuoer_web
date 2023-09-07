@@ -222,9 +222,9 @@ public class JDBCDemo implements UserDAO {
             return null;
         }
     }
-    public void DeleteManyUser(List<User> userList) {
-        for (User user : userList) {
-            delete(user.getEmail());
+    public void DeleteManyUser(List<String> emailList) {
+        for (String email : emailList) {
+            delete(email);
         }
     }
     public static void main(String[] args) {
