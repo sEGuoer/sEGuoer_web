@@ -207,10 +207,6 @@ public class DruidDemo implements UserDAO {
         return 0;
     }
 
-    @Override
-    public List<User> searchUser(String searchName) {
-        return UserDAO.super.searchUser(searchName);
-    }
 
     public static void main(String[] args) {
         DruidDemo druidDemo = new DruidDemo();

@@ -31,10 +31,11 @@ public class User {
 
     @Override
     public String toString() {
-        return username+"{" +
-                "account='" + account + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+        return "{" +
+                "\"account\":\"" + account + '\"' +
+                ",\"email\":\"" + email + '\"' +
+                ",\"password\":\"" + password + '\"' +
+                ",\"exist\":\"true" + '\"' +
                 '}';
     }
 

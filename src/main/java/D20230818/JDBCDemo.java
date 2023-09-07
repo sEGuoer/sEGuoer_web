@@ -200,7 +200,7 @@ public class JDBCDemo implements UserDAO {
         return 0;
     }
 
-    public List<User> searchUser(String searchName) {
+    public User searchUser(String searchName) {
         String query = "select id, email, password, username, account from user where email LIKE ?";
         try (PreparedStatement ppstmt = getConnection().prepareStatement(query)) {
             ppstmt.setString(1, searchName);
@@ -215,8 +215,9 @@ public class JDBCDemo implements UserDAO {
                 User user = new User(username, dataEmail, password, account);
                 System.out.println(id + "\t" + dataEmail + "\t" + password + "\t" + username + account);
                 userList.add(user);
+                return user;
             }
-            return userList;
+            return null;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

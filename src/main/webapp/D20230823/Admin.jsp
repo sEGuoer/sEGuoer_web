@@ -99,7 +99,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>用户列表</h1>
+                        <h1></h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right" id="UserList">
@@ -125,6 +125,21 @@
         <section class="content">
 
             <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">用户列表</h3>
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" id="table_search" class="form-control float-right" placeholder="Search">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-default" onclick="searchUser()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <table class="table mb-0">
                         <tr>
@@ -205,7 +220,7 @@
                     deleteEmailList.push(eachEmail)
                     $.post("deleteUser",      // send HTTP POST request to a page and get the answer
                         {
-                            email: eachEmail,       // send data
+                            email: eachEmail       // send data
                         },
                         function (data, status) { //retreive response
                         });
@@ -217,6 +232,25 @@
     }
 </script>
 <script>
+    function searchUser() {
+        let searchEmailElement = document.getElementById("table_search")
+        let searchEmail = searchEmailElement.value
+        $.ajax({
+                url : './searchUser?email=' + searchEmail,
+                dataType : 'json',
+            success : function (result) {
+                    if (result.email == searchEmail){
+                        var account ="账号:" + result.account + "\n";
+                        var email ="邮箱:" + result.email + "\n";
+                        var password ="密码:" + result.password;
+                        var message = account + email + password;
+                        alert(message)
+                    }else {
+                        alert("没有找到该用户")
+                    }
+            }
+            });
+    }
     function logoff() {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'clearSession', true);
