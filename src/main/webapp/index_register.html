@@ -119,7 +119,7 @@
                     <div class="mb-3 text-start">
                         <div class="btn-group me-2" role="group">
                             <span id="emailVerify" onclick="emailVerify()"><button
-                                    type="button" class="btn btn-primary">邮箱验证</button>
+                                    type="button" class="btn btn-primary" id="emailVerifyButton">邮箱验证</button>
                             </span>
                             <span id="refreshCodeVerify" onclick="refreshCodeVerify()"><button
                                     type="button" class="btn btn-primary">验证码验证</button>
@@ -148,7 +148,7 @@
 <script>
     function emailVerify() {
         document.getElementById("refreshCodeVerify").setAttribute("style", "display: none");
-        document.getElementById("emailVerify").setAttribute("style", "display: none");
+        document.getElementById("emailVerifyButton").setAttribute("innerText", "重新发送邮件");
         alert("验证码已发送到邮件中");
     }
 
