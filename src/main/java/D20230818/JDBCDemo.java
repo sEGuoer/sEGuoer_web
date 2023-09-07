@@ -2,11 +2,17 @@ package D20230818;
 
 import D20230904.mybatis.po.User;
 import D20230906.UserDAO;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class JDBCDemo implements UserDAO {
     public Connection getConnection() {
@@ -227,6 +233,42 @@ public class JDBCDemo implements UserDAO {
         for (String email : emailList) {
             delete(email);
         }
+    }
+    public void sentEmail(String verifyCode, String toWho) throws MessagingException {
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", true);
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.qq.com");
+        prop.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(System.getenv("qqmail"), System.getenv("password"));
+            }
+        });
+
+        Message message = new MimeMessage(session);
+        // who you are
+        message.setFrom(new InternetAddress(System.getenv("qqmail")));
+        // send to ...
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toWho));
+
+        message.setSubject("Mail Subject");
+
+        String msg = verifyCode;
+
+        MimeBodyPart mimeBodyPart = new MimeBodyPart();
+        mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
+
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(mimeBodyPart);
+
+        message.setContent(multipart);
+
+        Transport.send(message);
+
+        System.out.println("Sent message successfully....");
     }
     public static void main(String[] args) {
         UserDAO jdbcTest = new JDBCDemo();

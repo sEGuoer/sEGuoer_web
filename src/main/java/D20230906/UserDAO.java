@@ -1,6 +1,7 @@
 package D20230906;
 
 import D20230904.mybatis.po.User;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
@@ -19,6 +20,8 @@ public interface UserDAO {
 
     public default User searchUser(String searchName) {
         return null;
+    }
+    public default void sentEmail(String verifyCode, String toWho) throws MessagingException {
     }
 
 }
