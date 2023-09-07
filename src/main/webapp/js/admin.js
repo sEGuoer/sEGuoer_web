@@ -94,10 +94,7 @@ function setAddUserForm() {
 
 
 
-function selectUserCheckbox(){
 
-
-}
 function nextPage() {
     console.log(3)
     let nowPage = parseInt(document.getElementById("nowPage").innerText) ;

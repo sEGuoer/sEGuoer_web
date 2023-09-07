@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right" id="UserList">
-                            <li class="breadcrumb-item"><a href="#">Home(测试checked)</a></li>
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">
                                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                     <div class="btn-group me-2" role="group" aria-label="First group">
@@ -137,8 +137,8 @@
                             <th scope="col">Password</th>
                             <th scope="col">Account</th>
                             <th scope="col">
-                                <button class="btn btn-danger">
-                                    <span class="text-center" onclick="deleteManyUser()">批量删除</span>
+                                <button class="btn btn-danger text-center" id="deleteManyUser"
+                                        onclick="deleteManyUser()">批量删除
                                 </button>
                             </th>
                         </tr>
@@ -194,9 +194,26 @@
 </div>
 
 <script>
-    var a = $(".form-check .flexCheckIndeterminate")
-    if (a.prop("checked") == true) {
-        console.log("delete")
+    function deleteConfirmButton() {
+        var x = confirm("Are you sure you want to delete?");
+        if (x) {
+            let deleteEmailList = new Array();
+            var a = $(".form-check .flexCheckIndeterminate")
+            a.each(function () {
+                if ($(this).prop("checked") == true) {
+                    var eachEmail = $(this).parent().parent().parent().prop("id")
+                    deleteEmailList.push(eachEmail)
+                    $.post("deleteUser",      // send HTTP POST request to a page and get the answer
+                        {
+                            email: eachEmail,       // send data
+                        },
+                        function (data, status) { //retreive response
+                        });
+                }
+            })
+            window.location.reload();
+            console.log(deleteEmailList)
+        }
     }
 </script>
 <script>
@@ -211,7 +228,9 @@
             }
         }
     }
+
     let deleteManyUserIsExist = false
+
     function deleteManyUser() {
         if (deleteManyUserIsExist === false) {
             let checkboxInput = document.createElement("input")
@@ -221,20 +240,29 @@
 
             let checkboxLabel = document.createElement("label")
             checkboxLabel.className = "flexCheckIndeterminatelabel form-check-label"
-            checkboxLabel.setAttribute("for","flexCheckIndeterminate")
+            checkboxLabel.setAttribute("for", "flexCheckIndeterminate")
             $("span.number").before(checkboxInput)
             $("span.number").before(checkboxLabel)
+
+            let confirmDeleteButton = document.createElement("button")
+            confirmDeleteButton.id = "confirmDeleteButton"
+            confirmDeleteButton.className = "btn btn-danger text-center"
+            confirmDeleteButton.innerText = "一键删除"
+            confirmDeleteButton.setAttribute("onclick", "deleteConfirmButton()")
+            document.getElementById("deleteManyUser").after(confirmDeleteButton)
+
             deleteManyUserIsExist = true;
             console.log(false)
         } else if (deleteManyUserIsExist === true) {
+            document.getElementById("confirmDeleteButton").remove()
             var x = document.querySelectorAll(".flexCheckIndeterminate")
             var i2;
-            for (i2 = 0 ; i2< x.length ; i2++){
+            for (i2 = 0; i2 < x.length; i2++) {
                 x[i2].remove()
             }
             var y = document.querySelectorAll(".flexCheckIndeterminatelabel")
             var i1;
-            for (i1 = 0 ; i1< y.length ; i1++){
+            for (i1 = 0; i1 < y.length; i1++) {
                 y[i1].remove()
             }
             deleteManyUserIsExist = false;
