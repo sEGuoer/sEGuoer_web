@@ -16,7 +16,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet("/RegisterVerify")
+//@WebServlet("/RegisterVerify")
 public class RegisterVerify extends HttpServlet {
     private static volatile JDBCDemo jdbcDemo;
 

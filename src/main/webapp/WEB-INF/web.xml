@@ -8,6 +8,11 @@
     <param-name>hello-world</param-name>
     <param-value>hello-world-value</param-value>
   </context-param>
+  <context-param>
+    <param-name>MethodToConnectDB</param-name>
+    <param-value>JDBC</param-value>
+<!--    方法有JDBC和mybatis和DruidDemo-->
+  </context-param>
   <filter>
     <filter-name>SecondFilter</filter-name>
     <filter-class>D20230831.SecondFilter</filter-class>

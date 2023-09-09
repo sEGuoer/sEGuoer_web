@@ -12,7 +12,7 @@ public interface UserDAO {
     public List<User> testPreparedStatement();
     public User getUser(String email);
     public int getUser_id( String email);
-    public int add( String email, String password, String account,boolean a);
+    public int add( String email, String password, String account,boolean verifyCodeIsCorrect);
     public int add_Operation_record(int id, String time, String operation);
     public int delete(String email);
     public int update( String email, String account,String password,String updateEmail);

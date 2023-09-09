@@ -90,7 +90,7 @@ public class DruidDemo implements UserDAO {
         }
     }
 
-    public int add(String email, String password, String account, boolean a) {
+    public int add(String email, String password, String account, boolean verifyCodeIsCorrect) {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
         User useri = getUser(email);
         boolean isExist = false;
@@ -109,7 +109,7 @@ public class DruidDemo implements UserDAO {
                 i = 3;
             }
         }
-        if (!isExist && a) {
+        if (!isExist && verifyCodeIsCorrect) {
             try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
                 ppstmt.setString(1, email);
                 ppstmt.setString(2, password);

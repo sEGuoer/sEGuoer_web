@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 
-@WebFilter("/RegisterVerify")
+//@WebFilter("/RegisterVerify")
 
 public class RegisterFilter extends HttpFilter {
     private static volatile JDBCDemo jdbcDemo;
@@ -53,7 +53,6 @@ public class RegisterFilter extends HttpFilter {
         String account = req.getParameter("account");
         String verifyCode = req.getParameter("VerifyCode");
         JDBCDemo jdbcDemo = getJdbcTest();
-        Connection connection = jdbcDemo.getConnection();
         HttpSession session = req.getSession();
         String sessionCode = (String) session.getAttribute("VerifyCode");
         System.out.println(sessionCode.equals(verifyCode));

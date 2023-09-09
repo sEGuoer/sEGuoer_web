@@ -23,7 +23,7 @@ public class mybaties_login_dao extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession httpSession = req.getSession();
             String email = req.getParameter("email");
-            UserDAO mapper = Objects.requireNonNull(createSqlSessionFactory()).getMapper(UserMapper.class);
+            UserDAO mapper = createSqlSessionFactory();
             User user = mapper.getUser(email);
             resp.setHeader("info", "can found user");
             Date date = new Date();

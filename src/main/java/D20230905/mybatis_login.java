@@ -20,7 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet("/verify")
+//@WebServlet("/verify")
 public class mybatis_login extends HttpServlet {
     private static SqlSessionFactory sqlSessionFactory;
 

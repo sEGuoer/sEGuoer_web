@@ -14,13 +14,14 @@ import java.util.List;
 
 public interface UserMapper extends UserDAO {
 
-    public static SqlSession createSqlSessionFactory(){
+    public static UserMapper createSqlSessionFactory(){
         try {
             String resource = "D20230904/mybatis/mybatisConfig.xml";
             InputStream inputStream = Resources.getResourceAsStream(resource);
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession session = sqlSessionFactory.openSession(true);
-            return session ;
+            UserMapper mapper =session.getMapper(UserMapper.class);
+            return mapper ;
         }catch (Exception e){
             e.printStackTrace();
         }return null;
@@ -29,7 +30,7 @@ public interface UserMapper extends UserDAO {
     List<D20230904.mybatis.po.User> testPreparedStatement();
     User getUser(String email);
     int getUser_id( String email);
-    int add(@Param("email")String email,@Param("password") String password, @Param("account")String account,@Param("a") boolean a);
+    int add(@Param("email")String email,@Param("password") String password, @Param("account")String account,@Param("a") boolean verifyCodeIsCorrect);
     int add_Operation_record(@Param("user_id") int user_id,@Param("time") String time,@Param("operation")String operation);
     int delete( String email);
     int update( @Param("email")String email, @Param("account")String account, @Param("password")String password,@Param("updateEmail") String updateEmail);

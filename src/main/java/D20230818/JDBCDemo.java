@@ -87,7 +87,7 @@ public class JDBCDemo implements UserDAO {
         }
     }
 
-    public int add(String email, String password, String account, boolean a) {
+    public int add(String email, String password, String account, boolean verifyCodeIsCorrect) {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
         User useri = getUser(email);
         boolean isExist = false;
@@ -106,7 +106,7 @@ public class JDBCDemo implements UserDAO {
                 i = 3;
             }
         }
-        if (!isExist && a) {
+        if (!isExist && verifyCodeIsCorrect) {
             try (PreparedStatement ppstmt = getConnection().prepareStatement(insertSql)) {
                 ppstmt.setString(1, email);
                 ppstmt.setString(2, password);
@@ -244,19 +244,19 @@ public class JDBCDemo implements UserDAO {
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(System.getenv("qqmail"), System.getenv("password"));
+                return new PasswordAuthentication("1075534380@qq.com", "nsardjvomzokjbce");
             }
         });
 
         Message message = new MimeMessage(session);
         // who you are
-        message.setFrom(new InternetAddress(System.getenv("qqmail")));
+        message.setFrom(new InternetAddress("1075534380@qq.com"));
         // send to ...
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toWho));
 
         message.setSubject("Mail Subject");
 
-        String msg = verifyCode;
+        String msg = "验证码为" + verifyCode + "\n" + "有效期为30分钟";
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
