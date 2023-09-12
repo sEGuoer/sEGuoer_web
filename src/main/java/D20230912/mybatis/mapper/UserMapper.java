@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper extends UserDAO {
 
@@ -20,5 +21,6 @@ public interface UserMapper extends UserDAO {
 
     List<User> searchBlog(@Param("title")String title, @Param("content")String content);
     List<User> searchBlog(User user);
+    List<User> searchBlog(Map map);
 
 }

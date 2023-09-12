@@ -35,12 +35,13 @@ public class UserMapper {
     void searchBlog(){
         SqlSession session = sqlSessionFactory.openSession();
         D20230912.mybatis.mapper.UserMapper mapper = session.getMapper(D20230912.mybatis.mapper.UserMapper.class);
-        User user = new User();
-        user.setContent("content");
-        user.setTitle("MySQL");
-//        map.put("title","MySQL");
-//        map.put("content","content");
+//        User user = new User();
+//        user.setContent("content");
+//        user.setTitle("MySQL");
+        Map map = new HashMap();
+        map.put("title","MySQL");
+        map.put("content","content");
 
-        System.out.println(mapper.searchBlog(user).get(0).getContent());
+        System.out.println(mapper.searchBlog(map).get(0).getContent());
     }
 }
