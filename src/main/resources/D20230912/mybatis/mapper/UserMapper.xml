@@ -4,15 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="D20230912.mybatis.mapper.UserMapper">
-    <sql id="select-name">id as class_id</sql>
+<!--    <sql id="select-name">id as class_id</sql>-->
 <!--    把数据库中的id对应class中的class_id，sql种元素要写全-->
-    <select id="tableinfo">
-<include refid="select-name"/>
+    <select id="tableinfo" resultMap="RuseltMape">
+<!--<include refid="select-name"/>-->
         select *
         from blog_table
         where id = #{id}
     </select>
 <resultMap id="RuseltMape" type="D20230912.mybatis.po.User">
-
-</resultMap>
+    <id property="classID" column="table_ID" />
+    <result property="className" column="table_NAME" />
+    <result property="classYear" column="table_YEAR" />  </resultMap>
 </mapper>
