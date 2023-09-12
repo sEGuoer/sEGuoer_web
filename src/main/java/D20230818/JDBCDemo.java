@@ -86,6 +86,21 @@ public class JDBCDemo implements UserDAO {
             return 0;
         }
     }
+  public String getContent(int id) {
+        String query = "select content from boke_table where id = ?";
+        try (PreparedStatement ppstmt = getConnection().prepareStatement(query)) {
+            ppstmt.setInt(1, id);
+            ResultSet rs = ppstmt.executeQuery();
+            while (rs.next()) {
+                String content = rs.getString("content");
+                return content;
+            }
+            return "";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 
     public int add(String email, String password, String account, boolean verifyCodeIsCorrect) {
         String insertSql = "insert into user(email, password, username, account) values(?, ?, ? ,?);";
@@ -121,7 +136,7 @@ public class JDBCDemo implements UserDAO {
     }
 
     public int add_Operation_record(int id, String time, String operation) {
-        String insertSql = "insert into operation_record(user_id, Time, operation ) values(?, ? ,?);";
+        String insertSql = "insert into operation_record (user_id, Time, operation ) values(?, ? ,?);";
         try (PreparedStatement ppstmt = getConnection().prepareStatement(insertSql)) {
             ppstmt.setInt(1, id);
             ppstmt.setString(2, time);
@@ -271,8 +286,9 @@ public class JDBCDemo implements UserDAO {
         System.out.println("Sent message successfully....");
     }
     public static void main(String[] args) {
-        UserDAO jdbcTest = new JDBCDemo();
-        System.out.println(jdbcTest.searchUser("%709074535@qq.com%"));
+        JDBCDemo jdbcTest = new JDBCDemo();
+        System.out.println(jdbcTest.getContent(1));
+//        System.out.println(jdbcTest.searchUser("%709074535@qq.com%"));
 //        Connection connection = jdbcTest.getConnection();
 //        jdbcTest.getUser(connection, "admin@1");
 //        jdbcTest.testPreparedStatement(connection);
