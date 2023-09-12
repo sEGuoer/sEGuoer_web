@@ -1,8 +1,8 @@
-package D20230904.mybatis.mapper;
+package D20230912.mybatis.mapper;
 
 
-import D20230904.mybatis.po.User;
 import D20230906.UserDAO;
+import D20230912.mybatis.po.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +16,7 @@ public interface UserMapper extends UserDAO {
 
     public static UserMapper createSqlSessionFactory(){
         try {
-            String resource = "D20230904/mybatis/mybatisConfig.xml";
+            String resource = "D20230912/mybatis/mybatisConfig.xml";
             InputStream inputStream = Resources.getResourceAsStream(resource);
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             SqlSession session = sqlSessionFactory.openSession(true);
@@ -27,7 +27,6 @@ public interface UserMapper extends UserDAO {
         }return null;
     }
 
-    List<User> testPreparedStatement();
     User getUser(String email);
     int getUser_id( String email);
     int add(@Param("email")String email,@Param("password") String password, @Param("account")String account,@Param("a") boolean verifyCodeIsCorrect);
