@@ -19,5 +19,6 @@ public interface UserMapper extends UserDAO {
     int updateLoginTime( @Param("email")String email,@Param("loginTime") String loginTime);
 
     List<User> searchBlog(@Param("title")String title, @Param("content")String content);
+    List<User> searchBlog(User user);
 
 }

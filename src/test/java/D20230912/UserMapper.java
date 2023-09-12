@@ -1,5 +1,6 @@
 package D20230912;
 
+import D20230912.mybatis.po.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserMapper {
     private static SqlSessionFactory sqlSessionFactory;
@@ -32,6 +35,12 @@ public class UserMapper {
     void searchBlog(){
         SqlSession session = sqlSessionFactory.openSession();
         D20230912.mybatis.mapper.UserMapper mapper = session.getMapper(D20230912.mybatis.mapper.UserMapper.class);
-        System.out.println(mapper.searchBlog("MySQL","content").get(0).getContent());
+        User user = new User();
+        user.setContent("content");
+        user.setTitle("MySQL");
+//        map.put("title","MySQL");
+//        map.put("content","content");
+
+        System.out.println(mapper.searchBlog(user).get(0).getContent());
     }
 }
