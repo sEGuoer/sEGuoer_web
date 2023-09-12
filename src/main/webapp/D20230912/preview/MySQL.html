@@ -1,0 +1,160 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:MySQL</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<h2 id="mysql-">MySQL语句</h2>
+<h3 id="-">(一)  创建</h3>
+<h4 id="1-create-xxx-filename">1. 创建的命令为：create xxx filename</h4>
+<h4 id="-create-database-if-not-exists-db1-">如果不存在创建 create database if not exists db1;</h4>
+<h4 id="comment-">comment为备注</h4>
+<p>其中xxx可以为数据库(database),表格(table)<br>例如:</p>
+<pre><code class="lang-mysql">create database db2;
+create table tb_user
+(
+    age int comment &#39;年龄&#39;
+) comment &#39;用户表&#39;;
+</code></pre>
+<h4 id="2-create-table-tb_user">2. 创建表格时加入的内容  create table tb_user</h4>
+<h4 id="-key-comment-">(名称 变量名 （两种Key） （自动生成，唯一的,是否为空） （comment） )</h4>
+<pre><code class="lang-mysql">create table tb_user
+(
+    id       int PRIMARY KEY auto_increment comment &#39;ID，唯一标识&#39;,
+    username varchar(20) unique not null comment &#39;用户名&#39;,
+    age      int comment &#39;年龄&#39;,
+    gender   char(1) default &#39;男&#39; comment &#39;性别&#39;
+) comment &#39;用户表&#39;;  
+</code></pre>
+<h3 id="-">(二)  查看各种数据</h3>
+<p>询所有数据库 show databases<br>查看当前数据库下的表 show tables<br>查看指定表结构 DESCRIBE user<br>查看数据库的建表语句 SHOW CREATE TABLE user</p>
+<h3 id="-">(三) 修改表结构</h3>
+<ol>
+<li>为表 tb_emp 添加字段 qq varchar(11):</li>
+</ol>
+<pre><code class="lang-mysql">  ALTER TABLE tb_emp
+    ADD (qq varchar(11));  
+</code></pre>
+<ol start="2">
+<li>修改 tb_emp 字段类型 qq varchar(13)</li>
+</ol>
+<pre><code class="lang-mysql"> ALTER TABLE tb_emp
+    MODIFY qq varchar(13);  
+</code></pre>
+<ol start="3">
+<li>修改 tb_emp 字段名 qq 为 qq_num varchar(13)  <pre><code class="lang-mysql">ALTER TABLE tb_emp  
+CHANGE qq qq_num varchar(13);
+</code></pre>
+</li>
+</ol>
+<ol start="4">
+<li>删除 tb_emp 的 qq_num 字段  <pre><code class="lang-mysql">ALTER TABLE tb_emp  
+DROP COLUMN qq_num;
+</code></pre>
+</li>
+</ol>
+<ol start="5">
+<li><p>将tb_emp 表名修改为 emp  </p>
+<pre><code class="lang-mysql">RENAME TABLE tb_emp TO emp;
+</code></pre>
+</li>
+<li><p>删除 tb_emp 表  </p>
+<pre><code class="lang-mysql">DROP TABLE tb_emp;
+</code></pre>
+</li>
+</ol>
+<h3 id="-">(四) 数据操作语言</h3>
+<ol>
+<li>为 tb_emp 表的 username, name, gender 字段插入值<br>INSERT into tb_emp(username, name , gender)<br>values (&#39;二蛋&#39;, &#39;erdan&#39;, 10);</li>
+<li>为 tb_emp 表的 所有字段插入值<br>insert into tb_emp<br>values (null, &#39;ergouzi&#39;, &#39;123&#39;, &#39;二狗子&#39;, 2, &#39;1.jpg&#39;, 1, &#39;2010-01-01&#39;, now(), now());</li>
+<li>批量为 为 tb_emp 表的 username , name , gender 字段插入数据。一次插入两条记录<br>insert into tb_emp(username, name, gender)<br>values (&#39;xiaoyang&#39;, &#39;小样&#39;, 1),<br>(&#39;pig&#39;, &#39;二弟&#39;, 1);</li>
+<li><p>将 tb_emp 表的ID为1员工 姓名name字段更新为 &#39;张三&#39;<br>update tb_emp set name = &#39;张三&#39; , update_time = now() where id = 1;</p>
+</li>
+<li><p>将 tb_emp 表的所有员工的入职日期更新为 &#39;2010-01-01&#39;<br>update tb_emp set entry_date = &#39;2010-01-01&#39;, update_time = now();</p>
+</li>
+<li>删除 tb_emp 表中 ID为1的员工<br>delete from tb_emp where id = 1;</li>
+<li>删除 tb_emp 表中的所有员工<br>delete from tb_emp;</li>
+</ol>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>
