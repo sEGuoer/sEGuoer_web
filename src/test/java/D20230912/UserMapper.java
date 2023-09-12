@@ -24,6 +24,7 @@ public class UserMapper {
         SqlSession session = sqlSessionFactory.openSession();
         D20230912.mybatis.mapper.UserMapper mapper = session.getMapper(D20230912.mybatis.mapper.UserMapper.class);
         Assertions.assertTrue(mapper.tableinfo(1).size()>0);
+        Assertions.assertNull(mapper.tableinfo(1));
 //        System.out.println(mapper.tableinfo(1));
     }
 
