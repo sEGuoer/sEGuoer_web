@@ -28,4 +28,10 @@ public class UserMapper {
 //        System.out.println(mapper.tableinfo(1));
     }
 
+    @Test
+    void searchBlog(){
+        SqlSession session = sqlSessionFactory.openSession();
+        D20230912.mybatis.mapper.UserMapper mapper = session.getMapper(D20230912.mybatis.mapper.UserMapper.class);
+        System.out.println(mapper.searchBlog("MySQL","content").get(0).getContent());
+    }
 }
