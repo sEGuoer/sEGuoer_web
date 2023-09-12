@@ -11,4 +11,5 @@
         from blog_table
         where id = #{id}
     </select>
+
 </mapper>
