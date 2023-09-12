@@ -13,7 +13,7 @@
         where id = #{id}
     </select>
 <resultMap id="RuseltMape" type="D20230912.mybatis.po.User">
-    <id property="classID" column="table_ID" />
-    <result property="className" column="table_NAME" />
-    <result property="classYear" column="table_YEAR" />  </resultMap>
+    <id property="id" column="id" />
+    <result property="title" column="title" />
+    <result property="creator" column="creator" />  </resultMap>
 </mapper>
