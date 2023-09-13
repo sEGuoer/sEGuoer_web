@@ -3,10 +3,21 @@ package D20230908;
 import D20230818.JDBCDemo;
 import D20230904.mybatis.po.User;
 import D20230906.UserDAO;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserSevice implements Sevice {
     public String userRegister(String email, String password, String account, boolean IsVerifyCodeCorrect) {
@@ -62,5 +73,22 @@ public class UserSevice implements Sevice {
         }
     }
 
+    public String mdFileToHtmlFile(String resource,String title ,String content) throws IOException {
+        Parser parser = Parser.builder().build();
+        String xml = resource;
+        InputStream inputStream = Resources.getResourceAsStream(xml);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession session = sqlSessionFactory.openSession();
+        D20230912.mybatis.mapper.UserMapper mapper = session.getMapper(D20230912.mybatis.mapper.UserMapper.class);
+        Map map = new HashMap();
+        map.put("title",title);
+        map.put("content",content);
+        String input = mapper.searchBlog(map).get(0).getContent();
+        Node document = parser.parse(input);
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        String Content = renderer.render(document);
+        System.out.println(Content);
+        return Content;
+    }
 
 }
