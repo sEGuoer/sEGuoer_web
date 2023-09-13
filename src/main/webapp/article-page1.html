@@ -7,21 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>sEGuoer's_website</title>
     <link rel="stylesheet" href="vite/build/assets/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
     <style>
-        body {
-            overflow-x: hidden;
-        }
-
-        #hoverfloat:hover {
-            animation-duration: 1s;
-            -webkit-animation-duration: var(--animate-duration);
-        }
-
-        #hoverfloat:hover {
-            -webkit-animation-name: pulse;
-            animation-name: pulse;
-            -webkit-animation-timing-function: ease-in-out;
-            animation-timing-function: ease-in-out
+        .toc-link{
+            text-decoration: none;
         }
     </style>
 </head>
@@ -72,96 +61,105 @@
     </nav>
 </header>
 <main class="mt-5">
-    <div class="bd-content container">
-        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true"
-             class="scrollspy-example-2" tabindex="0">
-            <h2 class="h4 m-4 mb-5" id="speedup">npm 加速，修改镜像源</h2>
-            <div id="howlow">
-                <h3 class="h5 m-2 mt-5">为什么慢</h3>
-                <div class="lh-lg">执行 npm 各种命令的时候，默认是去 npm 官方镜像源获取需要安装的具体软件信息
-                    以下命令查看当前使用的镜像源
-                </div>
-                <div class="bg-light lh-lg">npm config get registry</div>
-                <div class="lh-lg">默认源地址在国外，从国内访问的速度肯定比较慢</div>
-            </div>
-            <div id="changeSourcesMirror">
-                <h3 class="h5 m-2 mt-5">如何修改镜像源</h3>
-                <div class="lh-lg">淘宝维护着一个完整的 npm 镜像源 <a class="link-warning link-underline link-underline-opacity-0" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org/</a></div>
-            </div>
-            <div id="changeSourcesMirror_a">
-                <h3 class="h5 m-2"> a). 临时修改</h3>
-                <div class="bg-light lh-lg">npm install 软件名 --registry https://registry.npm.taobao.org/</div>
-            </div>
-            <div>
-                <div id="changeSourcesMirror_b">
-                    <h3 class="h5 m-2"> b). 全局修改</h3>
-                    <div class="bg-light lh-lg">npm config set registry https://registry.npm.taobao.org/</div>
-                </div>
-            </div>
-            <div id="changeSourcesMirror_c">
-                <div>
-                    <h3 class="h5 m-2">c). 使用第三方软件快速修改、切换 npm 镜像源</h3>
-                    <div class="bg-light lh-lg">npm config set registry https://registry.npm.taobao.org/</div>
-                    <div class="lh-lg"><span class="text-warning">nrm </span>不仅可以快速切换镜像源，还可以测试自己网络访问不同源的速度</div>
-                </div>
-            </div>
-            <div>
-                <div id="installnrm">
-                    <h3 class="h5 m-2 mt-5">安装 nrm</h3>
-                    <div class="bg-light lh-lg">npm install -g nrm</div>
-                </div>
-            </div>
-            <div>
-                <div id="allSourceMirror">
-                    <h3 class="h5 m-2 mt-5">列出当前可用的所有镜像源</h3>
-                    <div>
-                        <li class="bg-light list-group">
-                            <ul>nrm ls</ul>
-                            <ul> npm ----- https://registry.npmjs.org/</ul>
-                            <ul>cnpm ---- http://r.cnpmjs.org/</ul>
-                            <ul>taobao -- https://registry.npm.taobao.org/</ul>
-                            <ul>nj ------ https://registry.nodejitsu.com/</ul>
-                            <ul>rednpm -- http://registry.mirror.cqupt.edu.cn</ul>
-                            <ul>skimdb -- https://skimdb.npmjs.com/registry</ul>
+    <div class="main_content container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div id="vditor-preview-element"
+                     class="markdown-body js-toc-content animate__animated animate__fadeInLeft vditor-reset">
+                    <h2>MySQL语句</h2>
+                    <h3>(一) 创建</h3>
+                    <h4>1. 创建的命令为：create xxx filename</h4>
+                    <h4>如果不存在创建 create database if not exists db1;</h4>
+                    <h4>comment为备注</h4>
+                    <p>其中xxx可以为数据库(database),表格(table)
+                        例如:create datebase db2
+                        create table tb_user()comment '用户表';</p>
+                    <h4>2. 创建表格时加入的内容 create table tb_user</h4>
+                    <h4>(名称 变量名 （两种Key） （自动生成，唯一的,是否为空） （comment） )</h4>
+                    <p>create table tb_user(
+                        id int PRIMARY KEY auto_increment comment 'ID，唯一标识',
+                        username varchar(20) unique not null comment '用户名',
+                        age int comment '年龄',
+                        gender char(1) default '男'comment '性别'
+                        )comment '用户表';</p>
+                    <h3>(二) 查看各种数据</h3>
+                    <p>询所有数据库 show databases
+                        查看当前数据库下的表 show tables
+                        查看指定表结构 DESCRIBE user
+                        查看数据库的建表语句 SHOW CREATE TABLE user</p>
+                    <h3>(三) 修改表结构</h3>
+                    <ol>
+                        <li>
+                            <p>为表 tb_emp 添加字段 qq varchar(11):
+                                ALTER TABLE tb_emp
+                                ADD (qq varchar(11));</p>
                         </li>
-                    </div>
+                        <li>
+                            <p>修改 tb_emp 字段类型 qq varchar(13)
+                                ALTER TABLE tb_emp
+                                MODIFY qq varchar(13);</p>
+                        </li>
+                        <li>
+                            <p>修改 tb_emp 字段名 qq 为 qq_num varchar(13)
+                                ALTER TABLE tb_emp
+                                CHANGE qq qq_num varchar(13);</p>
+                        </li>
+                        <li>
+                            <p>删除 tb_emp 的 qq_num 字段
+                                ALTER TABLE tb_emp
+                                DROP COLUMN qq_num;</p>
+                        </li>
+                        <li>
+                            <p>将tb_emp 表名修改为 emp
+                                RENAME TABLE tb_emp TO emp;</p>
+                        </li>
+                        <li>
+                            <p>删除 tb_emp 表
+                                DROP TABLE tb_emp;</p>
+                        </li>
+                    </ol>
+                    <h3>(四) 数据操作语言</h3>
+                    <ol>
+                        <li>
+                            <p>为 tb_emp 表的 username, name, gender 字段插入值
+                                INSERT into tb_emp(username, name , gender)
+                                values ('二蛋', 'erdan', 10);</p>
+                        </li>
+                        <li>
+                            <p>为 tb_emp 表的 所有字段插入值
+                                insert into tb_emp
+                                values (null, 'ergouzi', '123', '二狗子', 2, '1.jpg', 1, '2010-01-01', now(), now());</p>
+                        </li>
+                        <li>
+                            <p>批量为 为 tb_emp 表的 username , name , gender 字段插入数据。一次插入两条记录
+                                insert into tb_emp(username, name, gender)
+                                values ('xiaoyang', '小样', 1),
+                                ('pig', '二弟', 1);</p>
+                        </li>
+                        <li>
+                            <p>将 tb_emp 表的ID为1员工 姓名name字段更新为 '张三'
+                                update tb_emp set name = '张三' , update_time = now() where id = 1;</p>
+                        </li>
+                        <li>
+                            <p>将 tb_emp 表的所有员工的入职日期更新为 '2010-01-01'
+                                update tb_emp set entry_date = '2010-01-01', update_time = now();</p>
+                        </li>
+                        <li>
+                            <p>删除 tb_emp 表中 ID为1的员工
+                                delete from tb_emp where id = 1;</p>
+                        </li>
+                        <li>
+                            <p>删除 tb_emp 表中的所有员工
+                                delete from tb_emp;</p>
+                        </li>
+                    </ol>
                 </div>
             </div>
-            <div>
-                <div id="usetaobaoSource">
-                    <h3 class="h5 m-2 mt-5">使用淘宝镜像源</h3>
-                    <div class="bg-light lh-lg">nrm use taobao</div>
-                </div>
-            </div>
-            <div>
-                <div id="testSpeed">
-                    <h3 class="h5 m-2 mt-5"> 测试访问速度</h3>
-                    <div class="bg-light lh-lg">nrm test taobao</div>
-                    <div class="lh-lg m-2 mx-5">更多用法查看 <span class="text-warning">nrm</span> GitHub</div>
-                </div>
+            <div class="col-lg-3 offset-lg-1">
+                <div id="outline"
+                     class="js-toc toc sticky-top d-none d-lg-block animate__animated animate__fadeInRight animate__delay-1s"></div>
             </div>
         </div>
-    </div>
-    <div class="col-4 position-fixed end-0 top-0 mt-5">
-        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
-            <nav class="nav nav-pills flex-column">
-                <a class="nav-link" href="#speedup">npm 加速，修改镜像源</a>
-                <nav class="nav nav-pills flex-column">
-                    <a class="nav-link ms-3 my-1" href="#howlow">为什么慢</a>
-                    <a class="nav-link ms-3 my-1" href="#changeSourcesMirror">如何修改镜像源</a>
-                    <nav class="nav nav-pills flex-column">
-                        <a class="nav-link ms-5 my-1" href="#changeSourcesMirror_a">a). 临时修改</a>
-                        <a class="nav-link ms-5 my-1" href="#changeSourcesMirror_b">b). 全局修改</a>
-                        <a class="nav-link ms-5 my-1" href="#changeSourcesMirror_c">c). 使用第三方软件快速修改、切换 npm
-                            镜像源</a>
-                    </nav>
-                    <a class="nav-link ms-3 my-1" href="#installnrm">安装 nrm</a>
-                    <a class="nav-link ms-3 my-1" href="#allSourceMirror">列出当前可用的所有镜像源</a>
-                    <a class="nav-link ms-3 my-1" href="#usetaobaoSource">使用淘宝镜像源</a>
-                    <a class="nav-link ms-3 my-1" href="#testSpeed">测试访问速度</a>
-                </nav>
-            </nav>
-        </nav>
     </div>
 </main>
 <footer>
@@ -173,8 +171,36 @@
         </div>
     </nav>
 </footer>
-<script src="node_modules/@yaohaixiao/outline.js/outline.min.js "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
-<script src="vite/build/assets/app.js"></script>
+<script>
+    $('h1').attr('id', function () {
+        console.log(1)
+        return $(this).text();
+    })
+    $('h2').attr('id', function () {
+        console.log(2)
+        return $(this).text();
+    })
+    $('h3').attr('id', function () {
+        console.log(2)
+        return $(this).text();
+    })
+    $('h4').attr('id', function () {
+        console.log(2)
+        return $(this).text();
+    })
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.js-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.js-toc-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3, h4',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+    });
+</script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package D20230912;
 
-import D20230912.mybatis.po.User;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
