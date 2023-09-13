@@ -20,7 +20,7 @@ public class MySQL extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Sevice sevice = new UserSevice();
-        String content = sevice.mdFileToHtmlFile("D20230912/mybatis/mybatisConfig.xml","MySQL","content");
+        String content = sevice.mdFileToHtmlFile("D20230912/mybatis/mybatisConfig.xml","front-end","content");
         System.out.println("123");
         System.out.println(content);
         req.setAttribute("Content",content);

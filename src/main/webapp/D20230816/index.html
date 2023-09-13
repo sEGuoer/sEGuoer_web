@@ -5,15 +5,99 @@
     <title>toc</title>
 </head>
 <body>
-<h2>D20230901</h2>
+<h2>D20230913</h2>
+<h4>代码修改</h4>
 <ul>
-    <li>Listener</li>
+</ul>
+<h2>D20230912</h2>
+<h3>配置文件以及@Test的运用</h3>
+<ul>
+    <li> 1. &lt;sql id="select-name"&gt;...(配置文件)</li>
+    <li> 2. Assertions.assertTrue(Test)</li>
+    <li> 3. Assertions.assertNull</li>
+    <li> 4. Assertions.assertNotNull</li>
+    <li> 5. sql标签用来封装SQL语句, include标签来调用</li>
+    <li> 6. resultMap的使用</li>
+    <li> 7. ResultMapperTest@tableinfo</li>
+</ul>
+<ul>配置文件多种拿到参数的办法
+    <li>1. mybatis接口中注解的使用</li>
+    <li>2. mybatis接口中(用po中的封装类得到相应参数)</li>
+    <li>3. mybatis接口中(用map的key值来作为参数名，value为值)</li>
+</ul>
+<ul>md转html
+    <li>1. 页面展示（内容区域展示最原始的markdown内容）</li>
+    <li>2. 手动将 markdown 内容转成 html</li>
+    <li>3. 自动将 markdown 内容转成 html</li>
+</ul>
+<h2>D20230911</h2>
+<h4>文档编写</h4>
+<ul>
+    <li>SQL语句用法</li>
+    <li>前端博客样式变化</li>
+</ul>
+<h2>D20230908</h2>
+<h4>写代码日</h4>
+<ul>
+    <li>sevice的提出，（处理结构分为三层）</li>
+    <li>三层架构（控制/表现：Controller+View；业务逻辑+数据访问：Model）</li>
+    <li>- 表现层/User Interface layer：接收请求、封装数据、调用业务逻辑层、响应数据。（web/controller）</li>
+    <li>- 业务逻辑层/Business Logic Layer：封装具体的业务逻辑，如：注册。访问数据访问层的一个或多个基础功能，如：根据邮箱查询用户
+        + 增加用户。事务一般放在这一层来控制。(service)
+    </li>
+    <li> - 数据访问层/Data access layer：最基础的 CRUD 操作。(dao/mapper/repository)</li>
+</ul>
+<h2>D20230907</h2>
+<h4>写代码日</h4>
+<ul>
+    <li>批量删除功能，查找用户存在时弹出信息</li>
+    <li>邮箱验证和验证码验证</li>
+</ul>
+<h2>D20230906</h2>
+<ul>
+    <li>连接数据库的接口</li>
+    <li>控制日志输出的内容</li>
+    <li>发现的一些问题（原生JS的before方法只对querySelectorALL元素遍历后的最后一个元素生效）</li>
+    <li>解决办法是改用Jquery</li>
+</ul>
+<h2>D20230905</h2>
+<ul>
+    <li>登陆界面mybatis的运用</li>
+    <li>各个操作都用mybatis实现</li>
+    <li>HelloSlf4j</li>
+    <li>Slf4j with NOP provider</li>
+    <li>To switch logging frameworks,just replace slf4j binding on your class</li>
+    <li>LogVsSOUT</li>
+    <li>logback-classic</li>
+    <li>parameterized messages</li>
+    <li>GetLogger(Lambok)</li>
+    <li>console appender</li>
+    <li>file appender</li>
+    <li>patten property</li>
+</ul>
+<h2>D20230904</h2>
+<ul>
+    <li>连接池的运用</li>
+    <li>mybatis运用到和数据库的连接中</li>
+</ul>
+<h2>D20230901</h2>
+<div>Listener</div>
+<ul>
+    <li>@WebListener</li>
+    <li>(JAVA文件)Mylistener,对服务器启动和destroyed时可以进行一些操作</li>
+    <li>(JAVA文件)HttpSessionListener,对Session启动和destroyed时可以进行一些操作</li>
+    <li>(JAVA文件)AttributeListenerServlet,对Session的Attribute更改，增加，删除过程中可以进行一些操作 <a
+            href="../AttributeListenerServlet">AttributeListenerServlet</a></li>
 </ul>
 <h2>D20230831</h2>
+<div>Fliter要可插拔，一个sevlet可以加入多个过滤器 ，原理图</div>
+<img src="./img/img.png" alt="fliter运行" width="300" height="170">
 <ul>
+    <li>@WebFilter("/****")</li>
     <li><a href="../FisrtFilter?key=value">FisrtFilter</a></li>
     <li><a href="../TestFilter">TestFilter</a></li>
 </ul>
+<div>当有多个fliter时，有自己规定的顺序，若想自定义顺序，可以在WEB-INF文件夹中用&lt;filter-mapping&gt;控制顺序</div>
 <h2>D20230829</h2>
 <ul>
     <li><a href="../SessionTest">SessionTest</a></li>
@@ -23,6 +107,19 @@
 <ul>
     <li><a href="../CookieTest">CookieShow</a></li>
     <li><a href="../CookieForEach">CookieForEach</a></li>
+</ul>
+<h2>D20230824</h2>
+<h4>写代码日</h4>
+<ul>
+    <li>用户和管理员界面进一步优化</li>
+    <li>管理员界面删除功能加入</li>
+</ul>
+<h2>D20230823</h2>
+<h4>写代码日</h4>
+<ul>
+    <li>1.根据邮箱自动生成账号</li>
+    <li>2.登陆跳转界面出现问题的解决</li>
+    <li>3.管理员界面信息显示的优化</li>
 </ul>
 <h2>D20230822</h2>
 <ul>
@@ -49,9 +146,9 @@
 <p>匹配规则</p>
 <ul>
     <li>精确匹配 - 配置和访问路径一致</li>
-    <li>目录匹配 - /user/*     <a href="./user/aa">aa</a>&nbsp&nbsp&nbsp<a href="./user/bb">bb</a></li>
-    <li>扩展名匹配（后缀匹配）- *.do       <a href="../aa.do">aa.do</a>&nbsp&nbsp&nbsp<a href="../bb.do">bb.do</a></li>
-    <li>任意匹配 - /或/*      <a href="./anyone/asda">asda</a>&nbsp&nbsp&nbsp<a href="./anyone/haha">haha</a></li>
+    <li>目录匹配 - /user/* <a href="./user/aa">aa</a>&nbsp&nbsp&nbsp<a href="./user/bb">bb</a></li>
+    <li>扩展名匹配（后缀匹配）- *.do <a href="../aa.do">aa.do</a>&nbsp&nbsp&nbsp<a href="../bb.do">bb.do</a></li>
+    <li>任意匹配 - /或/* <a href="./anyone/asda">asda</a>&nbsp&nbsp&nbsp<a href="./anyone/haha">haha</a></li>
 </ul>
 <dl>
     <dt>请求行.method</dt>

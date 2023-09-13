@@ -4,14 +4,14 @@
 
 #### 标签
 
-1. a标签
+##### 1. a标签
 ```html
  <a href="web.html" target="_blank">html basic</a> 
 ``` 
 target上述属性为跳转到新页面
 
 
-2. img标签  
+##### 2. img标签  
    <img src="../AU9$DES3K209A)FZ`GKJ.png" alt="picture">
 ```html
    <img src="../AU9$DES3K209A)FZ`GKJ.png" alt="picture">
@@ -19,13 +19,13 @@ target上述属性为跳转到新页面
 alt指访问不到的时候显示picture
 
 
-3. br hr 以及 标题标签  
+##### 3. br hr 以及 标题标签  
    <br&gt;为换行标签，其中&lt;br />可以省略  
    <hr&gt;为分割线 默认占满左右  
    <h1&gt;&lt;/h1>为一级标题，从h1~h6有六级标题
 
 
-4. list标签  
+##### 4. list标签  
 ```html
 <ul>
  <li>1</li>
@@ -36,7 +36,7 @@ alt指访问不到的时候显示picture
    ul为无序标签，ol为有序标签，可以通过
 
 
-5. table标签
+##### 5. table标签
 
   <table>
         <tr>
@@ -73,27 +73,26 @@ alt指访问不到的时候显示picture
 
 其中属性colspan为控制长度,rowspan为控制高度  
 **tr可以替换为th，th表示表头**
-6. 不同字体标签  
+##### 6. 不同字体标签  
    <i&gt;斜体</i&gt;:<i>斜体</i>  
    <del&gt;删除线</del&gt;:<del>删除线</del>   
    b为粗体:   <b>粗体</b>  
    u为下划线:   <u>下划线</u>  
    上标sup:<sup>2</sup>下标sup:<sub>1</sub>
 
-7. 更多标签  
+##### 7. 更多标签  
 如无语意p标签，div标签等等，更多待补充
 
-### (二)  css
-#### css主要有两大属性：选择器，属性
-#### 引入css有两种方法：如下（均是在html页面title标签后加标签）
-#### （1）直接在html加入style标签，然后写选择器和属性
-#### （2）加link标签引入外部css
+### (二)  css 
+css主要有两大属性：选择器，属性  
+引入css有两种方法：如下（均是在html页面title标签后加标签）  
+(1）直接在html加入style标签，然后写选择器和属性 （2）加link标签引入外部css
 ```css
 .number{
    background: #6f42c1;
 }
 ```
-1. 选择器  
+#### 1. 选择器  
 上述代码中的.number为选择器中的一种，所以下面介绍一下选择器
 
 选择器有不同筛选方法，下面是三种主要的选择器
@@ -105,33 +104,33 @@ p{ /* 选择所有P标签元素  */}
 ID选择器
 #isad{ /* 选择所有标签属性id为isad的所有元素 */}
 ```
-更多选择器  
-（I）后代选择器
+#### 更多选择器  
+##### （I）后代选择器
 ```css
         div > * {
     color: #000FFF;
 }选择div的后一代所有元素
 ```
-(II)子元素选择器
+##### (II)子元素选择器
 ```css
  div * {
             color: #000FFF;
         }选择div元素的所有子元素
 ```
-(III)相邻兄弟选择器
+##### (III)相邻兄弟选择器
 ```css
  p + a{
             color: #FFF000;
         }选择p元素相邻的下一个同级的a元素，只选p后面的
 ```
-(IIII)普通兄弟选择器
+##### (IIII)普通兄弟选择器
 ```css
 p ~ a{
             color: #FFF000;
         }选择p元素相邻的下几个同级的a元素，只选p后面的
 ```
 
-2. 属性（以flex运用举例）
+#### 2. 属性（以flex运用举例）
 ```css
 #contentor{
     border: 1px ;
@@ -178,7 +177,7 @@ p ~ a{
 动画转换<a href="https://animate.style/">animate</a>
 ### (三)  JavaScript(俗称JS)
 #### JS BOM对象
-1. 系统对话框
+##### 1. 系统对话框
 ```html
 <!doctype html>
 <html lang="en">
@@ -221,7 +220,7 @@ p ~ a{
 </script>
 </html>
 ```
-2. 打开窗口
+##### 2. 打开窗口
 ```html
 <!DOCTYPE html>
 <html>
@@ -253,7 +252,7 @@ p ~ a{
 </script>
 </html>
 ```
-3. 关闭窗口
+##### 3. 关闭窗口
 ```html
 <!DOCTYPE html>
 <html>
@@ -271,7 +270,7 @@ p ~ a{
 </script>
 </html>
 ```
-4. 时间函数
+##### 4. 时间函数
 ```html
 <!DOCTYPE html>
 <html>
@@ -354,7 +353,7 @@ p ~ a{
 </html>
 ```
 
-5. history对象  
+##### 5. history对象  
    (I)
 ```html
 <!DOCTYPE html>
@@ -447,7 +446,7 @@ p ~ a{
 </script>
 </html>
 ```
-6. location对象
+##### 6. location对象
 ```html
 <!DOCTYPE html>
 <html>
@@ -499,7 +498,7 @@ p ~ a{
 
 
 #### JS事件
-1. 事件
+##### 1. 事件
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -543,7 +542,7 @@ p ~ a{
 </html>
 ```
 
-2. 事件处理
+##### 2. 事件处理
 ```html
 <!DOCTYPE html>
 <html>
@@ -617,7 +616,7 @@ p ~ a{
 
 </html>
 ```
-3. 常用时间
+##### 3. 常用时间
 ```html
 <!DOCTYPE html>
 <html>
