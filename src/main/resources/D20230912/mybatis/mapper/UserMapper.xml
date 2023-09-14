@@ -25,6 +25,11 @@ id as class_id,title,creator,</sql>
             </if>
         </where>
     </select>
+
+    <insert id="addUser" useGeneratedKeys="true" >
+        insert into user (username,email, account, password)
+        values (#{username},#{email}, #{account} ,#{password})
+    </insert>
 <!--    <select id="searchBlog" resultType="User">-->
 <!--        select *-->
 <!--        from blog_table-->

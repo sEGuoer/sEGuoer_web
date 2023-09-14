@@ -18,7 +18,7 @@ public interface UserMapper extends UserDAO {
     int add_Operation_record(@Param("user_id") int user_id,@Param("time") String time,@Param("operation")String operation);
     int update( @Param("email")String email, @Param("account")String account, @Param("password")String password,@Param("updateEmail") String updateEmail);
     int updateLoginTime( @Param("email")String email,@Param("loginTime") String loginTime);
-
+    int addUser(Map map);
     List<User> searchBlog(@Param("title")String title, @Param("content")String content);
     List<User> searchBlog(User user);
     List<User> searchBlog(Map map);
