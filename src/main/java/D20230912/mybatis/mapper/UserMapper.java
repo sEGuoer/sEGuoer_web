@@ -21,6 +21,7 @@ public interface UserMapper extends UserDAO {
     int deleteUser(Map map);
     int updateLoginTime( @Param("email")String email,@Param("loginTime") String loginTime);
     int addUser(Map map);
+    int deleteManyUser(int[] ints);
     List<User> searchBlog(@Param("title")String title, @Param("content")String content);
     List<User> searchBlog(User user);
     List<User> searchBlog(Map map);

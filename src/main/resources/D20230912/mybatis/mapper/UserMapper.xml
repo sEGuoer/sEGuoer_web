@@ -13,6 +13,14 @@ id as class_id,title,creator,</sql>
         from blog_table
         where id = #{id}
     </select>
+    <delete id="deleteManyUser" >
+        delete
+        from user where id in
+         <foreach collection="#{array}" item="ints" open="(" close=")" separator="," >
+                  #{ints}
+         </foreach>
+    </delete>
+
     <select id="searchBlog" resultType="User">
         select *
         from blog_table
@@ -25,7 +33,6 @@ id as class_id,title,creator,</sql>
             </if>
         </where>
     </select>
-
     <insert id="addUser" useGeneratedKeys="true" >
         insert into user (username,email, account, password)
         values (#{username},#{email}, #{account} ,#{password})

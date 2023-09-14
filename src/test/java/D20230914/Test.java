@@ -61,6 +61,16 @@ public class Test {
         Assertions.assertNotNull(mapper.deleteUser(map));
     }
     @org.junit.jupiter.api.Test
+    void deleteManyUser() {
+        SqlSession session = sqlSessionFactory.openSession();
+        D20230912.mybatis.mapper.UserMapper mapper = session.getMapper(D20230912.mybatis.mapper.UserMapper.class);
+//        User user = new User();
+//        user.setContent("content");
+//        user.setTitle("MySQL");
+        int[] ints = new int[]{24,25,54};
+        Assertions.assertNotNull(mapper.deleteManyUser(ints));
+    }
+    @org.junit.jupiter.api.Test
     void updateUser() {
         SqlSession session = sqlSessionFactory.openSession();
         D20230912.mybatis.mapper.UserMapper mapper = session.getMapper(D20230912.mybatis.mapper.UserMapper.class);
