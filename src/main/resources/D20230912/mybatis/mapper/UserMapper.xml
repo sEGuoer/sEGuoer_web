@@ -16,7 +16,14 @@ id as class_id,title,creator,</sql>
     <select id="searchBlog" resultType="User">
         select *
         from blog_table
-        where title LIKE #{title}
+        <where>
+            <if test="title != '' and title != null">
+                and title LIKE #{title}
+            </if>
+            <if test="creator != '' and creator != null">
+                and creator LIKE #{creator}
+            </if>
+        </where>
     </select>
     <resultMap id="RuseltMape" type="D20230912.mybatis.po.User">
     <id property="id" column="id" />
