@@ -68,7 +68,9 @@ public class Test {
 //        user.setContent("content");
 //        user.setTitle("MySQL");
         int[] ints = new int[]{24,25,54};
-        Assertions.assertNotNull(mapper.deleteManyUser(ints));
+        mapper.deleteManyUser(ints);
+        Assertions.assertNull(mapper.UserInfo(24));
+//        Assertions.assertNotNull(mapper.deleteManyUser(ints));
     }
     @org.junit.jupiter.api.Test
     void updateUser() {
