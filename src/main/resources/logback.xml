@@ -19,6 +19,6 @@
         <appender-ref ref="FILE"/>
     </root>
 
-    <logger name="D20230912.mybatis.mapper" level="WARN"/>
+<!--    <logger name="D20230912.mybatis.mapper" level="WARN"/>-->
     <logger name="org.apache.ibatis" level="WARN"/>
 </configuration>

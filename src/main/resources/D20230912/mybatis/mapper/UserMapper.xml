@@ -25,6 +25,18 @@ id as class_id,title,creator,</sql>
             </if>
         </where>
     </select>
+<!--    <select id="searchBlog" resultType="User">-->
+<!--        select *-->
+<!--        from blog_table-->
+<!--        <choose>-->
+<!--            <when test="title != '' and title != null">-->
+<!--                where title LIKE #{title}-->
+<!--            </when>-->
+<!--            <when test="creator != '' and creator != null">-->
+<!--                where creator LIKE #{creator}-->
+<!--            </when>-->
+<!--        </where>-->
+<!--    </select>-->
     <resultMap id="RuseltMape" type="D20230912.mybatis.po.User">
     <id property="id" column="id" />
     <result property="title" column="title" />
