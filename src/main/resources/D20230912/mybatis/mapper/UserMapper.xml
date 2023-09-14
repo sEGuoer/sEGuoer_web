@@ -30,6 +30,29 @@ id as class_id,title,creator,</sql>
         insert into user (username,email, account, password)
         values (#{username},#{email}, #{account} ,#{password})
     </insert>
+
+
+    <update id="updateUser">
+        update user
+        <set>
+            <if test="email != null and email !=''">
+                 email = #{email},
+            </if>
+            <if test="password != null and password !=''">
+                password = #{password},
+            </if>
+            <if test="account != null and account !=''">
+                account = #{account},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUser">
+        delete
+        from user
+        where id = #{id}
+    </delete>
 <!--    <select id="searchBlog" resultType="User">-->
 <!--        select *-->
 <!--        from blog_table-->
@@ -40,7 +63,7 @@ id as class_id,title,creator,</sql>
 <!--            <when test="creator != '' and creator != null">-->
 <!--                where creator LIKE #{creator}-->
 <!--            </when>-->
-<!--        </where>-->
+<!--        </choose>-->
 <!--    </select>-->
     <resultMap id="RuseltMape" type="D20230912.mybatis.po.User">
     <id property="id" column="id" />

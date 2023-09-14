@@ -57,11 +57,23 @@ public class Test {
 //        user.setContent("content");
 //        user.setTitle("MySQL");
         Map map = new HashMap();
+        map.put("id", "55");
+        Assertions.assertNotNull(mapper.deleteUser(map));
+    }
+    @org.junit.jupiter.api.Test
+    void updateUser() {
+        SqlSession session = sqlSessionFactory.openSession();
+        D20230912.mybatis.mapper.UserMapper mapper = session.getMapper(D20230912.mybatis.mapper.UserMapper.class);
+//        User user = new User();
+//        user.setContent("content");
+//        user.setTitle("MySQL");
+        Map map = new HashMap();
+        map.put("id", "55");
         map.put("email", "21312312@123");
         map.put("password", "123");
         map.put("username", "person");
         map.put("account", "21312312");
-        Assertions.assertNotNull(mapper.addUser(map));
+        Assertions.assertNotNull(mapper.updateUser(map));
     }
 }
 
