@@ -5,20 +5,22 @@ import D20230915.Demo.dao.impl.Nope;
 import D20230915.Demo.dao.impl.Simple;
 import D20230915.Demo.pojo.User;
 import D20230915.Demo.sevice.UserSevice;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 
-public class UserSeviceSimple implements UserSevice {
+public class UserSeviceSimple implements UserSevice, InitializingBean  {
     protected UserDao userSimple;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("UserSeviceSimple.afterPropertiesSet");
+    }
+
     public UserSeviceSimple() {
         System.out.println("UserSeviceNope");
     }
     public void setUserSimple(UserDao userSimple) {
         this.userSimple = userSimple;
-    }
-    public void init() {
-        System.out.println("init");
-    }
-    public void destroy() {
-        System.out.println("destroy");
     }
 
     public String userLogin(String email, String pwd){

@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="UserSevice" class="D20230915.Demo.sevice.impl.UserSeviceSimple" init-method="init" destroy-method="destroy">
+    <bean id="UserSevice" class="D20230915.Demo.sevice.impl.UserSeviceSimple" >
         <property name="userSimple" ref="UserDao"></property>
     </bean>
     <bean id="UserDao" class="D20230915.Demo.dao.impl.Simple"></bean>
