@@ -7,7 +7,8 @@
     </bean>
     <bean id="UserDao" class="D20230915.Demo.dao.impl.Simple"></bean>
     <bean id="InjectDemoUserDao" class="D20230915.Demo.dao.impl.InjectDemoUserDao">
-        <constructor-arg type="int" value="8080"/>
+        <constructor-arg type="int" value="8080" name="straightValue"/>
+        <constructor-arg type="int" value="8010"/>
         <constructor-arg type="int[]" value="1,2,3"/>
         <constructor-arg>
             <list>

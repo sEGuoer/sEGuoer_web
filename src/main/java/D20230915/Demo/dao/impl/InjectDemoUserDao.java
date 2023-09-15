@@ -6,8 +6,9 @@ import D20230915.Demo.pojo.User;
 import java.util.*;
 
 public class InjectDemoUserDao implements UserDao {
-    public InjectDemoUserDao(int straightValue, int[] array, List<String> list, Set<String> set, Map<String, String> map, Properties properties) {
+    public InjectDemoUserDao(int straightValue,int straightValue1, int[] array, List<String> list, Set<String> set, Map<String, String> map, Properties properties) {
         this.straightValue = straightValue;
+        this.straightValue1 = straightValue1;
         this.array = array;
         this.list = list;
         this.set = set;
@@ -16,6 +17,7 @@ public class InjectDemoUserDao implements UserDao {
     }
 
     private int straightValue;
+    private int straightValue1;
 
     private int[] array;
 
@@ -31,6 +33,9 @@ public class InjectDemoUserDao implements UserDao {
 
     public int getStraightValue() {
         return straightValue;
+    }
+    public int getStraightValue1() {
+        return straightValue1;
     }
 
     public int[] getArray() {
@@ -57,6 +62,7 @@ public class InjectDemoUserDao implements UserDao {
     public User getUserByEmail(String email, String pwd) {
         System.out.println("InjectDemoUserDao.getUserByEmail");
         System.out.println("自动注入的straight Value=" +getStraightValue());
+        System.out.println("自动注入的straight Value1=" +getStraightValue1());
         System.out.println("自动注入的数组=" + Arrays.toString(getArray()));
         System.out.println("自动注入的List=" + getList().toString());
         System.out.println("自动注入的Set=" + getSet().toString());
