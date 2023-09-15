@@ -9,8 +9,8 @@ public class bean {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext cpa = new ClassPathXmlApplicationContext("bean.xml");
         UserSevice userSevice = (UserSevice)cpa.getBean("UserSevice");
-        UserDao userDao = (UserDao)cpa.getBean("UserDao");
-        System.out.println(userSevice);
+        UserDao userDao = cpa.getBean(UserDao.class);
+        System.out.println(userSevice.userLogin("1","1"));
         System.out.println(userDao);
     }
 }
