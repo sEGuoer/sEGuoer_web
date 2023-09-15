@@ -8,7 +8,7 @@ import D20230915.Demo.sevice.UserSevice;
 public class UserSeviceNope implements UserSevice {
 
     protected UserDao userNope = new Nope();
-    public String userLogin(String email){
-          User user = userNope.getUserByEmail(email);
+    public String userLogin(String email,String pwd){
+          User user = userNope.getUserByEmail(email,pwd);
         return user.getPassword();}
 }

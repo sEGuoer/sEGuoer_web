@@ -6,5 +6,5 @@ import D20230915.Demo.pojo.User;
 
 public interface UserSevice {
 
-    public default String userLogin(String email){return "";}
+    public default String userLogin(String email,String pwd){return "";}
 }
