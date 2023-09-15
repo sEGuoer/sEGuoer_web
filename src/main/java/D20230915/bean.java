@@ -14,5 +14,6 @@ public class bean {
         System.out.println(userSevice.userLogin("1","1"));
         System.out.println(userSevice1.userLogin("1","1"));
         System.out.println(userDao);
+        cpa.close();
     }
 }
