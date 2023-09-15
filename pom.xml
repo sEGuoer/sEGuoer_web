@@ -86,6 +86,11 @@
             <artifactId>angus-mail</artifactId>
             <version>2.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>6.0.11</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>iae_web2</finalName>
