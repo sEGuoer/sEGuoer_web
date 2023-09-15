@@ -8,7 +8,9 @@ import D20230915.Demo.sevice.UserSevice;
 
 public class UserSeviceSimple implements UserSevice {
     protected UserDao userSimple;
-
+    public UserSeviceSimple() {
+        System.out.println("UserSeviceNope");
+    }
     public void setUserSimple(UserDao userSimple) {
         this.userSimple = userSimple;
     }

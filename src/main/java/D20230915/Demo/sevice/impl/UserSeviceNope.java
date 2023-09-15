@@ -9,6 +9,8 @@ public class UserSeviceNope implements UserSevice {
 
     protected UserDao userNope;
 
+
+
     public void setUserNope(UserDao userNope) {
         this.userNope = userNope;
     }
