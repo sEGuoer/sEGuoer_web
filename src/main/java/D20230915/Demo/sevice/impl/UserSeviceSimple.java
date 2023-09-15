@@ -7,8 +7,13 @@ import D20230915.Demo.pojo.User;
 import D20230915.Demo.sevice.UserSevice;
 
 public class UserSeviceSimple implements UserSevice {
-    protected UserDao userSimple = new Simple();
-    public String userLogin(String email,String pwd){
+    protected UserDao userSimple;
+
+    public void setUserSimple(UserDao userSimple) {
+        this.userSimple = userSimple;
+    }
+
+    public String userLogin(String email, String pwd){
         User user = userSimple.getUserByEmail(email,pwd);
         return "email="+user.getEmail()+" password="+user.getPassword();
     }
