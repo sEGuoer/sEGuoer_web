@@ -1,0 +1,13 @@
+package D20230915.Demo.dao.impl;
+
+import D20230915.Demo.dao.UserDao;
+import D20230915.Demo.pojo.User;
+
+public class Simple implements UserDao {
+    public User getUserByEmail(String email,String pwd) {
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(pwd);
+        return user;
+    }
+}
