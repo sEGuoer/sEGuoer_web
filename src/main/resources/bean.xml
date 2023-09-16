@@ -27,6 +27,7 @@
         <constructor-arg>
             <map>
                <entry key="name" value="mingzi"/>
+               <entry key="name" value="mingzi1"/>
                <entry key="pwd" value="mima"/>
                <entry key="account" value="zhanghao"/>
             </map>
