@@ -7,11 +7,8 @@ public class Present {
 
     @Override
     public String toString() {
-        return "Present{" +
-                "name='" + name + '\'' +
-                ", golden=" + golden +
-                ", content='" + content + '\'' +
-                '}';
+        return '\'' + content + '\'' +"\n"
+                + "奖励" + golden +  "人民币";
     }
 
     public int getGolden() {
