@@ -1,0 +1,22 @@
+[
+  {
+    "name": "礼包1",
+    "golden": 500,
+    "content": "礼包1内容"
+  },
+  {
+    "name": "礼包2",
+    "golden": 1000,
+    "content": "礼包2内容"
+  },
+  {
+    "name": "礼包3",
+    "golden": 2000,
+    "content": "礼包3内容"
+  },
+  {
+    "name": "礼包4",
+    "golden": 4000,
+    "content": "礼包4内容"
+  }
+]
