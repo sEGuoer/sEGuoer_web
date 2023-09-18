@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../vite/build/assets/app.css">
+</head>
+<body>
+<main class="container ">
+    <div class="m-4 text-center">
+        <div class="m-3 p-5 border"><div id="cup" class="border">杯子</div></div>
+        <button class id="CupButton" type="button" onclick="rollCup()">投骰子</button>
+    </div>
+</main>
+
+</body>
+<script src="ajax-demo/js/jquery.js"></script>
+<script>
+    let cupState = "第一次按之前"
+    function rollCup() {
+        let cup = document.getElementById("cup")
+        if (cupState == "第一次按之前"){
+            cup.className = "animate__animated animate__wobble animate__infinite border"
+            cupState = "第一次按"
+        }else if (cupState == "第一次按"){
+            cup.className = "border"
+            cupState = "第二次按"
+            $.ajax({
+                type: 'post',
+                url: 'RollResult',
+                data:{
+                    username: 'ujqp',
+                    password: 'pjqp',
+                },
+                success: function(data){
+                    alert("投骰子结果为:"+data);
+                }
+            });
+        }
+    }
+</script>
+</html>
